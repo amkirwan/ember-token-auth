@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import {config, hashConfig, savedStateConfig, reopenConfig} from 'ember-token-auth/tests/helpers/ember-oauth2';
-// import ajax from 'ic-ajax';
 
 export default {
   name: 'ember-oauth2-config',

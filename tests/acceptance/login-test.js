@@ -26,12 +26,23 @@ test('visiting /login when there is not valid login should not redirect', functi
 });
 
 test('visiting /login should redirect to index with there is a valid login', function() {
-  
   visit('/login');
   click('button#login');
   visit('/login');
 
   andThen(function() {
     equal(currentPath(), 'index');
+  });
+});
+
+test('visiting /login-error should redirect to index with there is a valid login', function() {
+
+  Ember.OAuth2.config.testAuth.currentUser = Ember.OAuth2.config.testAuth.currentUserError;
+
+  visit('/login');
+  click('button#login');
+
+  andThen(function() {
+    equal(find('p.error').text(), 'There was an error logging in. Please try again.');
   });
 });

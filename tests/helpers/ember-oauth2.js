@@ -7,6 +7,7 @@ export var config = function() {
       authBaseUri: 'http://localhost:4200/oauth/authorize',
       redirectUri: 'http://localhost:4200/oauth/callback',
       currentUser: 'http://localhost:4200/api/current_user',
+      currentUserError: 'http://localhost:4200/api/current_user_error', 
       tokeninfo: 'http://localhost:4200/oauth/token/info',
       scope: 'public'
     }
