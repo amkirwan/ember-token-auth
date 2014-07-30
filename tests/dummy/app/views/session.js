@@ -6,7 +6,9 @@ export default Ember.View.extend({
   logginError: function() {
     // if the loggin error is true update the view
     if (this.get('controller.logginError')) {
-      Ember.$('#current-user').html('<p class="error">There was an error logging in. Please try again.</p>');
+      Ember.run.once(this, function() {
+        Ember.$('#current-user').html('<p class="error">There was an error logging in. Please try again.</p>');
+      });
     }
   }.observes('controller.logginError') 
 });
