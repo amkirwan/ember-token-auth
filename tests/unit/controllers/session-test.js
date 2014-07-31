@@ -44,5 +44,18 @@ test('loadUser should set the currentUser', function() {
     equal(ctrl.get('logginError'), false);
     equal(ctrl.get('currentUser').get('lastname'), 'bar');
   });
+});
 
+
+test('should set lgginError to true when ajax fails', function() {
+  session.auth.currentUser = session.auth.currentUserError;
+
+  var ctrl = this.subject();
+  ctrl.set('session', session);
+
+  stop();
+  ctrl.loadUser().then(function() {
+    start();
+    equal(ctrl.get('logginError'), true);
+  });
 });
