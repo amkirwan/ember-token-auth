@@ -5,14 +5,13 @@ export default Ember.Object.extend({
     this._super();
     this.set('auth', Ember.OAuth2.create({providerId: this.providerId}));
   },
-
+  
   provider: function(providerId) {
-    if (arguments.length === 0) {
-      this.get('auth');
-    } else {
+    if (arguments.length === 1) {
       this.set('providerId', providerId);
       this.set('auth', Ember.OAuth2.create({providerId: providerId}));
     }
+    return this.get('auth');
   },
 
   isExpired: function() {
