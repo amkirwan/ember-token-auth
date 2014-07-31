@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import Session from 'ember-token-auth/models/session';
+import Session from '../models/session';
 
 export default {
   name: 'session',
