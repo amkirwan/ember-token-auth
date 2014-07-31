@@ -48,6 +48,7 @@ test('loadUser should set the currentUser', function() {
 
 
 test('should set lgginError to true when ajax fails', function() {
+  var oldCurrentUserPath = session.auth.currentUser;
   session.auth.currentUser = session.auth.currentUserError;
 
   var ctrl = this.subject();
@@ -58,4 +59,6 @@ test('should set lgginError to true when ajax fails', function() {
     start();
     equal(ctrl.get('logginError'), true);
   });
+
+  session.auth.currentUser = oldCurrentUserPath;
 });
