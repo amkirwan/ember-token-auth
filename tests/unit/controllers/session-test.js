@@ -28,14 +28,20 @@ test('it exists', function() {
   ok(controller);
 });
 
-test('loadUser async from the server', function() {
+test('loadUser should set the currentUser', function() {
+  expect(3); 
+
   var ctrl = this.subject();
   ctrl.set('session', session);
   ctrl.set('store', store);
-
   ctrl.transitionToRoute = function() { return true; };
 
+  equal(ctrl.get('currentUser'), null);
+
+  stop();
   ctrl.loadUser().then(function() {
+    start();
+    equal(ctrl.get('logginError'), false);
     equal(ctrl.get('currentUser').get('lastname'), 'bar');
   });
 
