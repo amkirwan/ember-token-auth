@@ -9,7 +9,7 @@ export default Ember.Controller.extend({
   }.property('session'),
 
 
-  loadUser: function(handleTrans) {
+  loadUser: function(handleTransition) {
     var self = this;
     return ajax(self.get('session.auth.currentUser')).then(function(json) {
       self.store.pushPayload('user', json);
@@ -17,9 +17,9 @@ export default Ember.Controller.extend({
       self.set('logginError', false);
       self.set('currentUser', user);
 
-      handleTrans = typeof handleTrans !== 'undefined' ? false : true;
+      handleTransition = typeof handleTransition !== 'undefined' ? false : true;
 
-      if (handleTrans) {
+      if (handleTransition) {
         var previousTransition = self.get('previousTransition');
         if (previousTransition) {
           self.set('previousTransition', null);
