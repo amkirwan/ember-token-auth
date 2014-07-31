@@ -28,10 +28,6 @@ export default Ember.Object.extend({
 
   authorize: function() {
     return this.auth.authorize();
-  },
-
-  currentUser: function() {
-    return this.auth.currentUser;
   }
 
 });
