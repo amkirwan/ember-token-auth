@@ -21,17 +21,16 @@ test('visiting /login when there is not valid login should not redirect', functi
   visit('/login');
 
   andThen(function() {
-    equal(currentPath(), 'login');
+    equal(currentURL(), '/login');
   });
 });
 
 test('visiting /login should redirect to index with there is a valid login', function() {
   visit('/login');
   click('button#login');
-  visit('/login');
 
   andThen(function() {
-    equal(currentPath(), 'index');
+    equal(currentURL(), '/');
   });
 });
 
