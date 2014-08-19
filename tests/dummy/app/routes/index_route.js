@@ -1,3 +1,3 @@
 import Ember from 'ember';
 
-export default Ember.Authorize.extend({ });
+export default Ember.Route.extend({ });
