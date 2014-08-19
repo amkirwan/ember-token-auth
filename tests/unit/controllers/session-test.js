@@ -1,11 +1,13 @@
 import Ember from 'ember';
 import DS from 'ember-data';
+import SessionAdapter from 'ember-token-auth/adapters/session';
 import User from 'ember-token-auth/models/user';
 import { test, moduleFor } from 'ember-qunit';
 import {auth, session, reopenConfig} from 'ember-token-auth/tests/helpers/ember-oauth2';
 
 var container;
 var store;
+var sessionAdapter;
 
 moduleFor('controller:session', 'SessionController', {
   needs: ['controller:session'],
@@ -15,10 +17,13 @@ moduleFor('controller:session', 'SessionController', {
     container.register('serializer:-default', DS.JSONSerializer);
     container.register('serializer:-rest', DS.RESTSerializer);
     container.register('adapter:-rest', DS.RESTAdapter);
+    container.register('adapter:session', SessionAdapter);
     container.injection('serializer', 'store', 'store:main');
 
     container.register('model:user', User);
     store = container.lookup('store:main');
+    sessionAdapter = container.lookup('adapter:session');
+    sessionAdapter.set('session', session);
   }
 });
 
@@ -34,6 +39,8 @@ test('loadUser should set the currentUser', function() {
   var ctrl = this.subject();
   ctrl.set('session', session);
   ctrl.set('store', store);
+  ctrl.set('container', container);
+
   ctrl.transitionToRoute = function() { return true; };
 
   equal(ctrl.get('currentUser'), null);
@@ -47,12 +54,13 @@ test('loadUser should set the currentUser', function() {
 });
 
 
-test('should set lgginError to true when ajax fails', function() {
+test('should set logginError to true when ajax fails', function() {
   var oldCurrentUserPath = session.auth.currentUser;
   session.auth.currentUser = session.auth.currentUserError;
 
   var ctrl = this.subject();
   ctrl.set('session', session);
+  ctrl.set('container', container);
 
   stop();
   ctrl.loadUser().then(function() {
