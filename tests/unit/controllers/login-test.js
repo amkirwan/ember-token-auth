@@ -34,8 +34,12 @@ test('authenticated action on success loadUser should be called', function() {
   var user = Ember.Object.create();
 
   // stub authorize method to only trigger success
-  var authStub = sinon.stub(session.auth, 'authorize', function() { return session.auth.trigger('success'); });
-  // stub the loadUser message to retun the user
+  var authStub = sinon.stub(auth, 'authorize', function() {
+    return new Promise(function(resolve) {
+      session.auth.trigger('success');
+    });
+  });
+
   var loadUserStub = sinon.stub(sessionCtrl, 'loadUser', function() { 
     return sessionCtrl.set('currentUser', user);
   });
@@ -54,7 +58,11 @@ test('authenticated action on error loadUser should be called', function() {
   ctrl.set('session', session);
 
   // stub authorize method to only trigger success
-  var authStub = sinon.stub(session.auth, 'authorize', function() { return session.auth.trigger('error'); });
+  var authStub = sinon.stub(auth, 'authorize', function() {
+    return new Promise(function(resolve) {
+      session.auth.trigger('error');
+    });
+  });
 
   ctrl.send('authenticate', 'testAuth');
 
