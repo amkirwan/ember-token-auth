@@ -5,8 +5,6 @@ import {auth, session, reopenConfig} from 'ember-token-auth/tests/helpers/ember-
 moduleFor('controller:login', 'LoginController', {
   // Specify the other units that are required for this test.
   needs: ['controller:session'],
-  setup: function() { 
-  }
 });
 
 // Replace this with your real tests.
