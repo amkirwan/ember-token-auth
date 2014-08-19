@@ -11,6 +11,7 @@ export default {
     container.register(session, Session, {singleton: true});
     container.typeInjection('controller', 'session', session);
     container.typeInjection('route', 'session', session);
+    container.typeInjection('adapter', 'session', session);
 
     var config = Ember.OAuth2.config;
     for (var key in config) {
@@ -27,8 +28,7 @@ export default {
     session = container.lookup('session:current');
     var sessionCtrl = container.lookup('controller:session');
 
-    app.deferReadiness();
-
+    app.deferReadiness(); 
     // try and load the user if the session is still valid
     Ember.run(function() {
       if (session.get('auth.providerId')) {
