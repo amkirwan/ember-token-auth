@@ -44,7 +44,9 @@ export var reopenConfig = function() {
       return this.openWindow();
     },
     openWindow: function() {
-      session.auth.trigger('redirect', hashConfig()); 
+      return new Ember.RSVP.Promise(function(resolve) {
+        resolve(hashConfig());
+      });
     }
   };
 };
