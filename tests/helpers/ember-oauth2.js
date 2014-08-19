@@ -4,11 +4,11 @@ export var config = function() {
   Ember.OAuth2.config = {
     testAuth: {
       clientId: '12345',
-      authBaseUri: 'http://localhost:4200/oauth/authorize',
-      redirectUri: 'http://localhost:4200/oauth/callback',
-      currentUser: 'http://localhost:4200/api/current_user',
-      currentUserError: 'http://localhost:4200/api/current_user_error', 
-      tokeninfo: 'http://localhost:4200/oauth/token/info',
+      authBaseUri: '/oauth/authorize',
+      redirectUri: '/oauth/callback',
+      currentUser: '/api/current_user',
+      currentUserError: '/api/current_user_error', 
+      tokeninfo: '/oauth/token/info',
       scope: 'public'
     }
   };
