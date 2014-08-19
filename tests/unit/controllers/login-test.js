@@ -35,7 +35,7 @@ test('authenticated action on success loadUser should be called', function() {
 
   // stub authorize method to only trigger success
   var authStub = sinon.stub(auth, 'authorize', function() {
-    return new Promise(function(resolve) {
+    return new Ember.RSVP.Promise(function(resolve) {
       session.auth.trigger('success');
     });
   });
@@ -59,7 +59,7 @@ test('authenticated action on error loadUser should be called', function() {
 
   // stub authorize method to only trigger success
   var authStub = sinon.stub(auth, 'authorize', function() {
-    return new Promise(function(resolve) {
+    return new Ember.RSVP.Promise(function(resolve) {
       session.auth.trigger('error');
     });
   });
