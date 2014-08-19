@@ -26,6 +26,10 @@ export default Ember.Object.extend({
     return this.auth.getToken();
   },
 
+  getAccessToken: function() {
+    return this.auth.getAccessToken();
+  },
+
   authorize: function() {
     return this.auth.authorize();
   }
