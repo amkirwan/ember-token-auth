@@ -1,7 +1,8 @@
 import Ember from 'ember';
 
 export var config = function() { 
-  Ember.OAuth2.config = {
+  window.ENV = window.ENV || {};
+  window.ENV['ember-oauth2'] = {
     testAuth: {
       clientId: '12345',
       authBaseUri: '/oauth/authorize',
@@ -12,7 +13,7 @@ export var config = function() {
       scope: 'public'
     }
   };
-  return Ember.OAuth2.config;
+  return window.ENV['ember-oauth2'];
 };
 
 export var hashConfig = function() { 

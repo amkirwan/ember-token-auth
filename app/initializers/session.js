@@ -13,7 +13,7 @@ export default {
     container.typeInjection('route', 'session', session);
     container.typeInjection('adapter', 'session', session);
 
-    var config = Ember.OAuth2.config;
+    var config = window.ENV['ember-oauth2'];
     for (var key in config) {
       if (config.hasOwnProperty(key)) {
         var provider = Ember.OAuth2.create({providerId: key});
