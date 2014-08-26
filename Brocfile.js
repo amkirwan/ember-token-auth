@@ -15,7 +15,6 @@ var app = new EmberApp({
   }  
 });
 
-app.import('vendor/ember-oauth2/dist/ember.oauth2.js');
 app.import('vendor/sinon/index.js');
 
 // Use `app.import` to add additional libraries to the generated
