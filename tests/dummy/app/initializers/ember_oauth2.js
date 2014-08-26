@@ -1,5 +1,5 @@
-import Ember from 'ember';
 import {config, hashConfig, savedStateConfig, reopenConfig} from 'ember-token-auth/tests/helpers/ember-oauth2';
+import OAuth2 from 'vendor/ember-oauth2/lib/ember-oauth2';
 
 export default {
   name: 'ember-oauth2-config',
@@ -9,6 +9,6 @@ export default {
     hashConfig();
     savedStateConfig();
     var c = reopenConfig();
-    Ember.OAuth2.reopen(c);
+    OAuth2.reopen(c);
   }
 };

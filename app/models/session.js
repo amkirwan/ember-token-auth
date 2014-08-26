@@ -1,15 +1,16 @@
 import Ember from 'ember';
+import OAuth2 from 'vendor/ember-oauth2/lib/ember-oauth2';
 
 export default Ember.Object.extend({
   init: function() {
     this._super();
-    this.set('auth', Ember.OAuth2.create({providerId: this.providerId}));
+    this.set('auth', OAuth2.create({providerId: this.providerId}));
   },
   
   provider: function(providerId) {
     if (arguments.length === 1) {
       this.set('providerId', providerId);
-      this.set('auth', Ember.OAuth2.create({providerId: providerId}));
+      this.set('auth', OAuth2.create({providerId: providerId}));
     }
     return this.get('auth');
   },

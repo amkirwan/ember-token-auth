@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import Session from '../models/session';
+import OAuth2 from 'vendor/ember-oauth2/lib/ember-oauth2';
 
 export default {
   name: 'session',
@@ -16,7 +17,7 @@ export default {
     var config = window.ENV['ember-oauth2'];
     for (var key in config) {
       if (config.hasOwnProperty(key)) {
-        var provider = Ember.OAuth2.create({providerId: key});
+        var provider = OAuth2.create({providerId: key});
         // load valid token if it exists and is not expired
         if (provider.getAccessToken() && !provider.accessTokenIsExpired()) {
           container.lookup(session).set('auth', provider);

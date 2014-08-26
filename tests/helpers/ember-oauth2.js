@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import OAuth2 from 'vendor/ember-oauth2/lib/ember-oauth2';
 
 export var config = function() { 
   window.ENV = window.ENV || {};
@@ -30,7 +31,7 @@ export var savedStateConfig = function () {
 };
 
 var c = config();
-export var auth = Ember.OAuth2.create({providerId: 'testAuth'});
+export var auth = OAuth2.create({providerId: 'testAuth'});
 export var session = Ember.Object.create({provider: function() {return true;}, auth: auth});
 
 export var reopenConfig = function() {
