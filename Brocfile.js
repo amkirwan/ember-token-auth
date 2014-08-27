@@ -5,7 +5,7 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 var appTree = mergeTrees(['app', 'tests/dummy/app'], { overwrite: true });
 var templatesTree = mergeTrees(['app/templates', 'tests/dummy/app/templates'], { overwrite: true });
-var vendorTree = mergeTrees(['vendor']);
+var vendorTree = mergeTrees(['vendor', 'vendor-addon']);
 
 var app = new EmberApp({
   trees: {

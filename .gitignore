@@ -11,21 +11,7 @@
 
 # dependencies
 /node_modules
-/vendor/ember-cli-shims
-/vendor/ember-cli-test-loader
-/vendor/ember-data
-/vendor/ember-load-initializers
-/vendor/ember-qunit-notifications
-/vendor/ember-qunit
-/vendor/ember-resolver
-/vendor/ember
-/vendor/handlebars
-/vendor/jquery
-/vendor/loader
-/vendor/qunit-notifications
-/vendor/qunit
-/vendor/sinon
-!vendor/ember-oauth2
+/vendor
 
 # misc
 /.sass-cache
