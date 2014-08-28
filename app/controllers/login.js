@@ -8,18 +8,22 @@ export default Ember.Controller.extend({
 
   actions: {
     authenticate: function(provider) {
-      this.get('session').provider(provider);
       var self = this;
-      this.get('session.auth').on('success', function() {
+      var session = this.get('session');
+
+      // set the provider
+      session.provider(provider);
+
+      session.get('auth').on('success', function() {
         self.get('sessionController').loadUser();
       });
-      this.get('session.auth').on('error', function(error) {
+      session.get('auth').on('error', function(error) {
         Ember.Logger.error('Error: ' + error);
       });
-      this.get('session').authorize().then(function(response) {
-        self.get('session.auth').trigger('redirect', response);
+      session.authorize().then(function(response) {
+        session.get('auth').trigger('redirect', response);
       }, function(error) {
-        self.get('session.auth').trigger('error', error);
+        session.get('auth').trigger('error', error);
       });
     }
   }
