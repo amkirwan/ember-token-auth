@@ -4,7 +4,7 @@ import Ember from 'ember';
   * @overview OAuth2 library for Emberjs that stores tokens in the browsers localStorage
   * @license   Licensed under MIT license
   *            See https://raw.github.com/amkirwan/ember-oauth2/master/LICENSE
-  * @version   0.5.0
+  * @version   0.5.1
   *
   * @module ember-oauth2
   * @class ember-oauth2
@@ -138,7 +138,7 @@ export default Ember.Object.extend(Ember.Evented, {
    * @return {String} Authorization uri for generating an OAuth2 token
    */
   authUri: function() {
-    if (this.get('state') === null) this.set('state', this.uuid());
+    if (!this.get('state')) { this.set('state', this.uuid()); }
     var uri = this.get('authBaseUri');
     uri += '?response_type=token' +
         '&redirect_uri=' + encodeURIComponent(this.get('redirectUri')) +
@@ -175,19 +175,16 @@ export default Ember.Object.extend(Ember.Evented, {
    */
   openWindow: function(url) {
     var dialog = window.open(url, 'Authorize', 'height=600, width=450');
-    if (window.focus) dialog.focus();
+    if (window.focus && dialog) { dialog.focus(); }
     var self = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      self.one('success', function() { resolve(dialog); });
-      self.one('error', function(error) { 
-        var errObj = new Error('Dialog failed with ' + error);
-        reject({dialog: dialog, error: errObj});
-      });
+      if (dialog) { resolve(dialog); } 
+      else { reject(new Error('Opening dialog login window failed.')); } 
     });
   },
 
   /**
-    @method authSuccess
+   @method authSuccess
     @param {Object} The params returned from the OAuth2 callback
     @return {String} the access_token from the params
   */
@@ -435,7 +432,7 @@ export default Ember.Object.extend(Ember.Evented, {
  * @property {String} VERSION
  * @final
 */
-var VERSION = "0.5.0";
+var VERSION = "0.5.1";
 
 /**
  * @method version

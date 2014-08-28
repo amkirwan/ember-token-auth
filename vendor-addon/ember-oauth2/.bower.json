@@ -1,6 +1,6 @@
 {
   "name": "ember-oauth2",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "homepage": "https://github.com/amkirwan/ember-oauth2",
   "authors": [
     "Anthony Kirwan <amkirwan@gmail.com>"
@@ -47,11 +47,11 @@
     "jasmine": ">= 2.0",
     "sinonjs": "*"
   },
-  "_release": "0.5.0",
+  "_release": "0.5.1",
   "_resolution": {
     "type": "version",
-    "tag": "v0.5.0",
-    "commit": "15d528104acd4c76b79db8bb61a4530b1b483f30"
+    "tag": "v0.5.1",
+    "commit": "c86ab038c3a5474d7dde444ff7e85d7b7922dc73"
   },
   "_source": "git://github.com/amkirwan/ember-oauth2.git",
   "_target": "*",
