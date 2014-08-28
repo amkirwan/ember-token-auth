@@ -16,8 +16,10 @@ export default Ember.Controller.extend({
       this.get('session.auth').on('error', function(error) {
         Ember.Logger.error('Error: ' + error);
       });
-      this.get('session.auth').authorize().then(function(redirectUrl) {
-        self.get('session.auth').trigger('redirect', redirectUrl);
+      this.get('session').authorize().then(function(response) {
+        self.get('session.auth').trigger('redirect', response);
+      }, function(error) {
+        self.get('session.auth').trigger('error', error);
       });
     }
   }
