@@ -33,4 +33,5 @@ export default Ember.Controller.extend({
       Ember.Logger.error('Error: ' + err.errorThrown);
     });
   }
+
 });

@@ -32,7 +32,12 @@ export default Ember.Object.extend({
   },
 
   authorize: function() {
-    return this.auth.authorize();
+    var self = this;
+    return new Ember.RSVP.Promise(function(resolve) {
+      Ember.run.later(function() {
+        resolve(self.auth.authorize());
+      }, 3000);
+    });
   }
 
 });
