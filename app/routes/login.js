@@ -1,14 +1,42 @@
-import Ember from 'ember';
-
 export default Ember.Route.extend({
   beforeModel: function(/*transition*/) {
     if (this.session.isNotExpired()) {
       this.transitionTo('index');
     } 
   },
+
+  model: function(provider) {
+  },
+
   setupController: function(controller/*, model*/) {
     if (this.session.isExpired()) {
       controller.set('currentUser', null);
+    }
+  },
+  actions: {
+    authenticate: function(provider) {
+      var router = this;
+      var session = this.get('session');
+
+      // set the provider
+      session.provider(provider);
+
+      session.get('auth').on('success', function() {
+        // var sessionController = router.controllerFor('session');
+        router.controllerFor('session').loadUser();
+      });
+      session.get('auth').on('error', function(error) {
+        Ember.Logger.error('Error: ' + error);
+      });
+      session.authorize().then(function(response) {
+        session.get('auth').trigger('redirect', response);
+      }, function(error) {
+        session.get('auth').trigger('error', error);
+      });
+    },
+
+    loading: function(transition, originRoute) {
+      alert('loading');
     }
   }
 });
