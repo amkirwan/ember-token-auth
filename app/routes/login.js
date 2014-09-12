@@ -43,8 +43,8 @@ export default Ember.Route.extend({
       router.refresh();
     },
 
-    loading: function(transition, originRoute) {
-      alert('loading');
+    loading: function(/*transition, originRoute*/) {
+      Ember.Logger.debug('authenticating');
     }
   }
 });
