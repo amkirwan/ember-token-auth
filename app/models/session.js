@@ -34,9 +34,7 @@ export default Ember.Object.extend({
   authorize: function() {
     var self = this;
     return new Ember.RSVP.Promise(function(resolve) {
-      Ember.run.later(function() {
-        resolve(self.auth.authorize());
-      }, 3000);
+      resolve(self.auth.authorize());
     });
   }
 
