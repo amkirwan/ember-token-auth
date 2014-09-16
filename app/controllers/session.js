@@ -11,26 +11,30 @@ export default Ember.Controller.extend({
   loadUser: function(handleTransition) {
     var self = this;
     var adapter = this.get('container').lookup('adapter:session');
-    return adapter.currentUser().then(function(json) {
-      self.store.pushPayload('user', json);
-      var user = self.store.findById('user', json.user.id);
-      self.set('logginError', false);
-      self.set('currentUser', user);
+    return new Ember.RSVP.Promise(function(resolve, reject) { 
+      adapter.currentUser().then(function(json) {
+        self.store.pushPayload('user', json);
+        var user = self.store.findById('user', json.user.id);
+        self.set('logginError', false);
+        self.set('currentUser', user);
 
-      handleTransition = typeof handleTransition !== 'undefined' ? false : true;
+        handleTransition = typeof handleTransition !== 'undefined' ? false : true;
 
-      if (handleTransition) {
-        var previousTransition = self.get('previousTransition');
-        if (previousTransition) {
-          self.set('previousTransition', null);
-          previousTransition.retry();
-        } else {
-          self.transitionToRoute('index');
+        if (handleTransition) {
+          var previousTransition = self.get('previousTransition');
+          if (previousTransition) {
+            self.set('previousTransition', null);
+            previousTransition.retry();
+          } else {
+            self.transitionToRoute('index');
+          }
         }
-      }
-    }, function(err) {
-      self.set('logginError', true);
-      Ember.Logger.error('Error: ' + err.errorThrown);
+        resolve(user);
+      }, function(err) {
+        self.set('logginError', true);
+        Ember.Logger.error('Error: ' + err.errorThrown);
+        reject(err);
+      });
     });
   }
 
