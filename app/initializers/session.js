@@ -8,6 +8,8 @@ export default {
 
   initialize: function(container, app) {
 
+    app.deferReadiness(); 
+
     var session = 'session:current';
     container.register(session, Session, {singleton: true});
     container.typeInjection('controller', 'session', session);
@@ -29,12 +31,14 @@ export default {
     session = container.lookup('session:current');
     var sessionCtrl = container.lookup('controller:session');
 
-    app.deferReadiness(); 
     // try and load the user if the session is still valid
-    Ember.run(function() {
-      if (session.get('auth.providerId')) {
-        sessionCtrl.loadUser(false);
-      }
+    if (session.get('auth.providerId')) {
+      sessionCtrl.loadUser(false).then(function(user) {
+        return app.advanceReadiness();
+      }, function(error) {
+        return app.advanceReadiness();
+      });
+    } else {
       app.advanceReadiness();
     });
   }
