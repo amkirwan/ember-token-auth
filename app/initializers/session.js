@@ -1,4 +1,4 @@
-import Ember from 'ember';
+// import Ember from 'ember';
 import Session from '../models/session';
 import OAuth2 from 'vendor/ember-oauth2/lib/ember-oauth2';
 
@@ -33,13 +33,13 @@ export default {
 
     // try and load the user if the session is still valid
     if (session.get('auth.providerId')) {
-      sessionCtrl.loadUser(false).then(function(user) {
+      sessionCtrl.loadUser(false).then(function() {
         return app.advanceReadiness();
-      }, function(error) {
+      }, function() {
         return app.advanceReadiness();
       });
     } else {
       app.advanceReadiness();
-    });
+    }
   }
 };
