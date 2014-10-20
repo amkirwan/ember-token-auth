@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import OAuth2 from 'vendor/ember-oauth2/lib/ember-oauth2';
+import OAuth2 from 'ember-oauth2';
 
 export var config = function() { 
   window.ENV = window.ENV || {};

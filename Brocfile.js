@@ -1,21 +1,28 @@
 /* global require, module */
 
-var mergeTrees = require('broccoli-merge-trees');
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+
+var mergeTrees = require('broccoli-merge-trees');
 
 var appTree = mergeTrees(['app', 'tests/dummy/app'], { overwrite: true });
 var templatesTree = mergeTrees(['app/templates', 'tests/dummy/app/templates'], { overwrite: true });
-var vendorTree = mergeTrees(['vendor', 'vendor-addon']);
 
 var app = new EmberApp({
   trees: {
     app: appTree,
-    templates: templatesTree,
-    vendor: vendorTree
+    templates: templatesTree
   }  
 });
 
-app.import('vendor/sinon/index.js');
+if (app.env === 'development') {
+  app.import('bower_components/sinon/index.js');
+}
+
+app.import('bower_components/ember-oauth2/dist/ember-oauth2.amd.js', {
+  exports: {
+    'ember-oauth2': ['default']
+  }
+});
 
 // Use `app.import` to add additional libraries to the generated
 // output files.

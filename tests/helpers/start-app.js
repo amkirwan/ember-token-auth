@@ -1,8 +1,8 @@
 /* global require */
-
-var Application = require('ember-token-auth/tests/dummy/app/app')['default'];
-var Router = require('ember-token-auth/tests/dummy/app/router')['default'];
 import Ember from 'ember';
+import Application from 'ember-token-auth/tests/dummy/app/app';
+import Router from 'ember-token-auth/tests/dummy/app/router';
+import config from 'ember-token-auth/config/environment';
 
 export default function startApp(attrs) {
   var App;
