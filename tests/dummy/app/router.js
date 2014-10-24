@@ -1,8 +1,6 @@
 import Ember from 'ember';
 
-var Router = Ember.Router.extend({
-  location: 'none'
-});
+var Router = Ember.Router;
 
 Router.map(function() {
   this.route('login');
