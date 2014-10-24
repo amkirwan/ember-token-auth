@@ -4,7 +4,9 @@ import OAuth2 from 'ember-oauth2';
 export default Ember.Object.extend({
   init: function() {
     this._super();
-    this.set('auth', OAuth2.create({providerId: this.providerId}));
+    if (this.get('providerId')) {
+      this.set('auth', OAuth2.create({providerId: this.get('providerId')}));
+    }
   },
   
   provider: function(providerId) {
@@ -16,19 +18,35 @@ export default Ember.Object.extend({
   },
 
   isExpired: function() {
-    return this.auth.accessTokenIsExpired();
+    if (this.get('auth')) {
+      return this.get('auth').accessTokenIsExpired();
+    } else {
+      return true;
+    }
   },
 
   isNotExpired: function() {
-    return !this.auth.accessTokenIsExpired();
+    if (this.get('auth')) {
+      return !this.auth.accessTokenIsExpired();
+    } else {
+      return false;
+    }
   },
 
   getToken: function() {
-    return this.auth.getToken();
+    if (this.get('auth')) {
+      return this.auth.getToken();
+    } else {
+      return null;
+    }
   },
 
   getAccessToken: function() {
-    return this.auth.getAccessToken();
+    if (this.get('auth')) {
+      return this.auth.getAccessToken();
+    } else {
+      return null;
+    }
   },
 
   authorize: function() {
