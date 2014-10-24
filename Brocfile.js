@@ -18,12 +18,6 @@ if (app.env === 'development') {
   app.import('bower_components/sinon/index.js');
 }
 
-app.import('bower_components/ember-oauth2/dist/ember-oauth2.amd.js', {
-  exports: {
-    'ember-oauth2': ['default']
-  }
-});
-
 // Use `app.import` to add additional libraries to the generated
 // output files.
 //
