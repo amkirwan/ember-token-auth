@@ -14,6 +14,12 @@ var app = new EmberApp({
   }  
 });
 
+app.import('bower_components/ember-oauth2/dist/ember-oauth2.amd.js', {
+  exports: {
+    'ember-oauth2': [ 'default' ]
+  }
+});
+
 if (app.env === 'development') {
   app.import('bower_components/sinon/index.js');
 }
