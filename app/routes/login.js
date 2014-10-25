@@ -14,7 +14,7 @@ export default Ember.Route.extend({
   },
 
   setupController: function(controller/*, model*/) {
-    if (this.session.isExpired()) {
+    if (this.get('session').isExpired()) {
       controller.set('currentUser', null);
     }
   },

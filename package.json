@@ -10,7 +10,7 @@
     "ember-addon"
   ],
   "ember-addon": {
-    "main": "lib/ember-cli-main.js"
+    "configPath":"tests/dummy/config"
   },
   "scripts": {
     "start": "ember server",

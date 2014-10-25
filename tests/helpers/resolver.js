@@ -1,5 +1,5 @@
 import Resolver from 'ember/resolver';
-import config from 'ember-token-auth/config/environment';
+import config from '../../config/environment';
 
 var resolver = Resolver.create();
 

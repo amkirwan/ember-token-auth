@@ -1,4 +1,4 @@
 // import Ember from 'ember';
-import Protected from 'ember-token-auth/routes/protected';
+import Protected from './protected';
 
 export default Protected.extend({});

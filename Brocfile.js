@@ -1,18 +1,8 @@
 /* global require, module */
 
-var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+var EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 
-var mergeTrees = require('broccoli-merge-trees');
-
-var appTree = mergeTrees(['app', 'tests/dummy/app'], { overwrite: true });
-var templatesTree = mergeTrees(['app/templates', 'tests/dummy/app/templates'], { overwrite: true });
-
-var app = new EmberApp({
-  trees: {
-    app: appTree,
-    templates: templatesTree
-  }  
-});
+var app = new EmberAddon();
 
 app.import('bower_components/ember-oauth2/dist/ember-oauth2.amd.js', {
   exports: {

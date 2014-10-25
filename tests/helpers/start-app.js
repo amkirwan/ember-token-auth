@@ -1,18 +1,14 @@
 /* global require */
 import Ember from 'ember';
-import Application from 'ember-token-auth/tests/dummy/app/app';
-import Router from 'ember-token-auth/tests/dummy/app/router';
-import config from 'ember-token-auth/config/environment';
+import Application from '../../app';
+import Router from '../../router';
+import config from '../../config/environment';
 
 export default function startApp(attrs) {
   var App;
 
-  var attributes = Ember.merge({
-    // useful Test defaults
-    rootElement: '#ember-testing',
-    LOG_ACTIVE_GENERATION:false,
-    LOG_VIEW_LOOKUPS: false
-  }, attrs); // but you can override;
+  var attributes = Ember.merge({}, config.APP);
+  attributes = Ember.merge(attributes, attrs);
 
   Router.reopen({
     location: 'none'
