@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import { test, moduleFor } from 'ember-qunit';
-import {auth, session, reopenConfig} from 'ember-token-auth/tests/helpers/ember-oauth2';
+import {auth, session, reopenConfig} from 'dummy/tests/helpers/ember-oauth2';
 
 moduleFor('controller:login', 'LoginController', {
   // Specify the other units that are required for this test.

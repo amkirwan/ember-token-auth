@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import { test, moduleForModel } from 'ember-qunit';
-import Session from 'ember-token-auth/models/session';
-import {config, auth, reopenConfig} from 'ember-token-auth/tests/helpers/ember-oauth2';
+import Session from 'dummy/models/session';
+import {config, auth, reopenConfig} from 'dummy/tests/helpers/ember-oauth2';
 
 var model;
 

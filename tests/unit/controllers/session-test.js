@@ -1,9 +1,9 @@
 import Ember from 'ember';
 import DS from 'ember-data';
-import SessionAdapter from 'ember-token-auth/adapters/session';
-import User from 'ember-token-auth/models/user';
+import SessionAdapter from 'dummy/adapters/session';
+import User from 'dummy/models/user';
 import { test, moduleFor } from 'ember-qunit';
-import {auth, session, reopenConfig} from 'ember-token-auth/tests/helpers/ember-oauth2';
+import {auth, session, reopenConfig} from 'dummy/tests/helpers/ember-oauth2';
 
 var container;
 var store;
