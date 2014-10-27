@@ -20,6 +20,11 @@ tests/
 tmp/
 dist/
 server/
+grunt/
+public/
+config/
+
+testem.json
 
 bower_components/
 node_modules/
