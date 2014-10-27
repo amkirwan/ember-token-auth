@@ -4,28 +4,24 @@
 
 This is a work in progress, use at your own risk.
 
+This is an [ember-cli](https://github.com/stefanpenner/ember-cli) addon that demonstrates how to use [Ember-OAuth2](https://github.com/amkirwan/ember-oauth) library for authentication in you app. 
+
 ## Installation
 
-This is an [ember-cli](/stefanpenner/ember-cli) addon that demonstrates how to use [Ember-OAuth2](/amkirwan/ember-oauth) library
-for authentication in you app. 
+To use the addon with your EmberCli app add it to your package.json file and run the generate to install the bower dependencies.
 
-Currently this addon uses a custom branch of ember-cli for using addons with your application. Once the addon setup is ready
-in official ember-cli release the addon will be changed to use that branch. 
-
-To use this addon with an ember-cli app add it to your package json devDependencies:
-
-```json
-"devDependencies": {
-  "ember-token-auth": "amkirwan/ember-token-auth"
-}
+```
+npm install --save-dev ember-token-auth
+ember generate ember-token-auth
 ```
 
-### Getting it work with your Ember-CLI App
+### Getting it to work with your Ember-CLI App
 
-Create an initialzier to setup your Ember-OAuth2 config
+Create an initialzier to setup your Ember-OAuth2 config. For more information checkout the Ember-OAuth2 [README](https://github.com/amkirwan/ember-oauth).
 
 ```javascript 
 import Ember from 'ember';
+import OAuth2 from 'ember-oauth2';
 
 export default {
   name 'ember-oauth2-config', 
@@ -43,15 +39,28 @@ export default {
 }
 ```
 
-To define a protected route that requires authentication define your routes like this : 
+To define a protected route that requires authentication define your routes like this: 
 
 ```javascript
-import Protected from 'your-app-namespace/routes/protected';
+// app/routes/the-route.js
+
+import Protected from './routes/protected';
 
 export default Protected.extend();
 ```
 
-Add the Session controller available to your controllers in the `Application.js` controller
+Depending on the needs of your app you can import the protected route from `ember-token-auth` a couple of different ways.
+
+```javascript
+import Protected from './routes/protected';
+// or 
+import Protected from 'app-module-prefix/routes/protected';
+// or
+import Protected from 'ember-token-auth/routes/protected';
+```
+
+Add the Session controller available to your controllers in the `Application.js` controller.
+
 ```javascript
 import Ember from 'ember';
 
@@ -84,7 +93,6 @@ export default Ember.View.extend({
 });
 ```
 
-
 ## Running Ember-Token-Auth and the tests
 
 * `git clone https://github.com/amkirwan/ember-token-auth.git`
@@ -96,4 +104,4 @@ export default Ember.View.extend({
 
 * `ember build`
 
-For more information on using ember-cli, visit [http://iamstef.net/ember-cli/](http://iamstef.net/ember-cli/).
+For more information on using ember-cli, visit [EmberCli](http://www.ember-cli.com/)
