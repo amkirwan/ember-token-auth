@@ -4,7 +4,7 @@
 
 This is a work in progress, use at your own risk.
 
-This is an [ember-cli](http://www.ember-cli.com/#developing-addons-and-blueprints) addon that demonstrates how to use [Ember-OAuth2](https://github.com/amkirwan/ember-oauth2) library for authentication in you app. 
+This is an [EmberCli](http://www.ember-cli.com/#developing-addons-and-blueprints) addon that demonstrates how to use [Ember-OAuth2](https://github.com/amkirwan/ember-oauth2) library for authentication in you app. 
 
 ## Installation
 
