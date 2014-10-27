@@ -39,7 +39,7 @@ export default {
 }
 ```
 
-To define a protected route that requires authentication define your routes like this: 
+To create a protected route that requires authentication define your routes like this: 
 
 ```javascript
 // app/routes/the-route.js
@@ -49,7 +49,7 @@ import Protected from './routes/protected';
 export default Protected.extend();
 ```
 
-Depending on the needs of your app you can import the protected route from `ember-token-auth` a couple of different ways.
+Depending on the needs of your app you can create a protected route by importing it from `ember-token-auth` a few different ways. For more information checkout the [EmberCli Addon](http://www.ember-cli.com/#developing-addons-and-blueprints) docs.
 
 ```javascript
 import Protected from './routes/protected';
