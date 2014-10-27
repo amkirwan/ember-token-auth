@@ -1,8 +1,4 @@
-import DS from 'ember-data';
+import Ember from 'ember';
+import User from 'ember-token-auth/models/user';
 
-var attr = DS.attr;
-
-export default DS.Model.extend({
-  firstname: attr(),
-  lastname: attr()  
-});
+export default User;
