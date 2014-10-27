@@ -7,15 +7,25 @@
 *.swo
 .DS_Store
 .grunt
+Gemfile.lock
+InstalledFiles
 _yardoc
 coverage
 doc/
-
+lib/bundler/man
+pkg
+rdoc
+spec/reports
 tests/
-vendor/
 tmp/
+dist/
+server/
 
 bower_components/
 node_modules/
+Gruntfile.js
+yuidoc.json
+src/
 .travis.yml
+CHANGELOG.md
 bower.json
