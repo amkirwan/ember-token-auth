@@ -1,7 +1,7 @@
 {
   "name": "ember-token-auth",
-  "version": "0.0.0",
-  "private": true,
+  "version": "0.0.1-beta.1",
+  "private": fals,
   "directories": {
     "doc": "doc",
     "test": "test"
@@ -10,7 +10,7 @@
     "ember-addon"
   ],
   "ember-addon": {
-    "configPath":"tests/dummy/config"
+    "configPath": "tests/dummy/config"
   },
   "scripts": {
     "start": "ember server",
@@ -37,7 +37,9 @@
     "express": "^4.8.5",
     "originate": "0.1.5",
     "glob": "^3.2.9",
-    "broccoli-merge-trees": "^0.2.1"
+    "broccoli-merge-trees": "^0.2.1",
+    "grunt": "~0.4.5",
+    "grunt-versioner": "~0.1.6"
   },
   "APIMethod": "stub"
 }
