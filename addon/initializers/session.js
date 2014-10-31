@@ -17,7 +17,7 @@ export function initialize(container, app) {
   container.typeInjection('route', 'session', session);
   container.typeInjection('adapter', 'session', session);
 
-  var config = window.ENV['ember-oauth2'];
+  var config = window.EmberENV['ember-oauth2'];
   session = container.lookup(session);
   for (var key in config) {
     if (config.hasOwnProperty(key)) {

@@ -36,7 +36,7 @@ test('visiting /login should redirect to index with there is a valid login', fun
 
 test('visiting /login-error should redirect to index with there is a valid login', function() {
 
-  window.ENV['ember-oauth2'].testAuth.currentUser = window.ENV['ember-oauth2'].testAuth.currentUserError;
+  window.EmberENV['ember-oauth2'].testAuth.currentUser = window.EmberENV['ember-oauth2'].testAuth.currentUserError;
 
   visit('/login');
   click('button#login');
