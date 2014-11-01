@@ -7,14 +7,13 @@ export default Ember.Controller.extend({
     this.get('session').isNotExpired();
   }.property('session'),
 
-
   loadUser: function(handleTransition) {
     var self = this;
     var adapter = this.get('container').lookup('adapter:session');
     return new Ember.RSVP.Promise(function(resolve, reject) { 
       adapter.currentUser().then(function(json) {
-        self.store.pushPayload('user', json);
-        var user = self.store.findById('user', json.user.id);
+        self.store.pushPayload(window.EmberENV['ember-oauth2']['model'], json);
+        var user = self.store.findById(window.EmberENV['ember-oauth2']['model'], json.user.id);
         self.set('logginError', false);
         self.set('currentUser', user);
 

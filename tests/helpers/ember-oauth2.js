@@ -2,8 +2,8 @@ import Ember from 'ember';
 import OAuth2 from 'ember-oauth2';
 
 export var config = function() { 
-  window.EmberENV = window.EmberENV || {};
   window.EmberENV['ember-oauth2'] = {
+    model: 'user',
     testAuth: {
       clientId: '12345',
       authBaseUri: '/oauth/authorize',
