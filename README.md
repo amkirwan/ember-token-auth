@@ -21,6 +21,8 @@ ember generate ember-token-auth
 
 Create an initialzier to setup your Ember-OAuth2 config. For more information checkout the Ember-OAuth2 [README](https://github.com/amkirwan/ember-oauth).
 
+In addition you will need to set the name of the model that the user should be persisted to. In the example setup it is set to `user`.
+
 ```javascript 
 import Ember from 'ember';
 import OAuth2 from 'ember-oauth2';
@@ -29,14 +31,15 @@ export default {
   name 'ember-oauth2-config', 
 
   initialize: function(/*container, app*/) {
-    Ember.OAuth2.config = {
+    window.EmberENV['ember-oauth2'] = {
+      model: 'user',
       google: {
         clientId: "xxxxxxxxxxxx",
         authBaseUri: 'https://accounts.google.com/o/oauth2/auth',
         redirectUri: 'https://oauth2-login-demo.appspot.com/oauth/callback',
         scope: 'public write'
       }
-    }
+    };
   }
 }
 ```
