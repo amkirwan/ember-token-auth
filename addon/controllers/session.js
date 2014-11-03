@@ -7,6 +7,16 @@ export default Ember.Controller.extend({
     this.get('session').isNotExpired();
   }.property('session'),
 
+  savedTransition: function(handleTransition) {
+    var previousTransition = this.get('previousTransition');
+    if (previousTransition) {
+      this.set('previousTransition', null);
+      previousTransition.retry();
+    } else {
+      this.transitionToRoute('index');
+    }
+  },
+
   loadUser: function(handleTransition) {
     var self = this;
     var adapter = this.get('container').lookup('adapter:session');
