@@ -8,12 +8,19 @@ export default Ember.Controller.extend({
   }.property('session'),
 
   savedTransition: function(handleTransition) {
-    var previousTransition = this.get('previousTransition');
-    if (previousTransition) {
-      this.set('previousTransition', null);
-      previousTransition.retry();
-    } else {
-      this.transitionToRoute('index');
+    // make handleTransition the default
+    if (typeof handleTransition === 'undefined') {
+      handleTransition = true;
+    }
+
+    if (handleTransition) {
+      var previousTransition = this.get('previousTransition');
+      if (previousTransition) {
+        this.set('previousTransition', null);
+        previousTransition.retry();
+      } else {
+        this.transitionToRoute('index');
+      } 
     }
   },
 
@@ -37,7 +44,7 @@ export default Ember.Controller.extend({
           self.set('currentUser', user);
         });
 
-        self.savedTransition();
+        self.savedTransition(handleTransition);
 
         resolve(user);
       }, function(err) {
