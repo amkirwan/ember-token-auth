@@ -23,21 +23,22 @@ export default Ember.Controller.extend({
     return new Ember.RSVP.Promise(function(resolve, reject) { 
       adapter.currentUser().then(function(json) {
         self.store.pushPayload(window.EmberENV['ember-oauth2']['model'], json);
-        var user = self.store.findById(window.EmberENV['ember-oauth2']['model'], json.user.id);
-        self.set('logginError', false);
-        self.set('currentUser', user);
 
-        handleTransition = typeof handleTransition !== 'undefined' ? false : true;
-
-        if (handleTransition) {
-          var previousTransition = self.get('previousTransition');
-          if (previousTransition) {
-            self.set('previousTransition', null);
-            previousTransition.retry();
-          } else {
-            self.transitionToRoute('index');
+        var modelKey = null;
+        for (var key in json) {
+          // key could be returned as plural if using JsonApi format.
+          if (window.EmberENV['ember-oauth2']['model'] === Ember.String.singularize(key)) {
+            modelKey = key;
           }
         }
+
+        var user = self.store.findById(window.EmberENV['ember-oauth2']['model'], json[modelKey]['id']).then(function(user) {
+          self.set('logginError', false);
+          self.set('currentUser', user);
+        });
+
+        self.savedTransition();
+
         resolve(user);
       }, function(err) {
         self.set('logginError', true);
