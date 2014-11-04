@@ -1,6 +1,6 @@
 # Ember-token-auth
 
-Current Version: **[0.0.2](https://github.com/amkirwan/ember-token-auth/releases/tag/v0.0.2)**
+Current Version: **[0.0.3](https://github.com/amkirwan/ember-token-auth/releases/tag/v0.0.3)**
 
 ## Warning
 
