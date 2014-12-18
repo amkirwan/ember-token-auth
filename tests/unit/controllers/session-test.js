@@ -53,7 +53,6 @@ test('loadUser should set the currentUser', function() {
   });
 });
 
-
 test('should set logginError to true when ajax fails', function() {
   expect(1);
   var oldCurrentUserPath = session.auth.currentUser;

@@ -13,7 +13,7 @@ test('it exists', function() {
   ok(controller);
 });
 
-test('is authenticated should return the currentUser when authenticated', function() {
+test('authenticated should return the currentUser when authenticated', function() {
   var ctrl = this.subject();
   var sessionCtrl = ctrl.get('controllers.session');
   equal(ctrl.get('isAuthenticated'), null);
