@@ -27,7 +27,7 @@ export default Ember.Controller.extend({
   loadUser: function(handleTransition) {
     var self = this;
     var adapter = this.get('container').lookup('adapter:session');
-    return new Ember.RSVP.Promise(function(resolve, reject) { 
+    return new Ember.RSVP.Promise(function(resolve, reject) {
       adapter.currentUser().then(function(json) {
         self.store.pushPayload(window.EmberENV['ember-oauth2']['model'], json);
 
@@ -49,7 +49,6 @@ export default Ember.Controller.extend({
         resolve(user);
       }, function(err) {
         self.set('logginError', true);
-        Ember.Logger.error('Error: ' + err.errorThrown);
         reject(err);
       });
     });
