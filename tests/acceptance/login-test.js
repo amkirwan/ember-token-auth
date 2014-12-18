@@ -42,6 +42,7 @@ test('visiting /login-error should redirect to index with there is a valid login
   click('button#login');
 
   andThen(function() {
+    equal(currentURL(), '/login');
     equal(find('p.error').text(), 'There was an error logging in. Please try again.');
   });
 });
