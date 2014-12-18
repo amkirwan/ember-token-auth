@@ -29,10 +29,14 @@ export default Ember.Route.extend({
       session.provider(provider);
 
       session.get('auth').on('success', function() {
-        router.controllerFor('session').loadUser();
+        router.controllerFor('session').loadUser().then(function(value) {
+        }, function(err) {
+          Ember.Logger.error(err);
+        });
       });
+
       session.get('auth').on('error', function(error) {
-        Ember.Logger.error('Error: ' + error);
+        Ember.Logger.error('Error: Message' + error);
       });
       // refresh route
       router.refresh();
