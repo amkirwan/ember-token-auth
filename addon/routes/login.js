@@ -31,14 +31,18 @@ export default Ember.Route.extend({
       session.get('auth').on('success', function() {
         router.controllerFor('session').loadUser().then(function(value) {
         }, function(err) {
+          Ember.Logger.error("Error: Cannot retrieve the current user.");
           Ember.Logger.error(err);
         });
       });
 
       session.get('auth').on('error', function(error) {
-        Ember.Logger.error('Error: Message' + error);
+        router.controllerFor('session').set('logginError', true);
+        Ember.Logger.error("Error: Login rejected:");
+        Ember.Logger.error(error);
       });
-      // refresh route
+
+      // refresh the route model
       router.refresh();
     }
   }
