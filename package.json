@@ -1,6 +1,6 @@
 {
   "name": "ember-token-auth",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "directories": {
     "doc": "doc",
     "test": "test"
@@ -41,6 +41,8 @@
     "glob": "^4.0.5",
     "grunt": "~0.4.5",
     "grunt-versioner": "~0.1.6",
+    "load-grunt-config": "^0.16.0",
+    "load-grunt-tasks": "^2.0.0",
     "originate": "0.1.5"
   },
   "APIMethod": "stub"
