@@ -10,7 +10,6 @@ var store;
 var sessionAdapter;
 
 moduleFor('controller:session', 'SessionController', {
-  needs: ['controller:session'],
   setup: function() { 
     container = new Ember.Container(); 
     container.register('store:main', DS.Store.extend());
@@ -27,7 +26,6 @@ moduleFor('controller:session', 'SessionController', {
   }
 });
 
-// Replace this with your real tests.
 test('it exists', function() {
   var controller = this.subject();
   ok(controller);

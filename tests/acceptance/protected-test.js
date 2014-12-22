@@ -29,6 +29,7 @@ test('visiting /foobar then logging should redirect back to /foobar', function()
   visit('/foobar');
   click('button#login');
 
+
   andThen(function() {
     equal(currentPath(), 'foobar');
   });
