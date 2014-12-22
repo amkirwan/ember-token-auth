@@ -10,8 +10,8 @@ app.import('bower_components/ember-oauth2/dist/ember-oauth2.amd.js', {
   }
 });
 
-if (app.env === 'development') {
-  app.import('bower_components/sinon/index.js');
+if (app.env === 'development' || app.env === 'test') {
+  app.import('bower_components/sinon-browser-only/sinon.js');
 }
 
 // Use `app.import` to add additional libraries to the generated
