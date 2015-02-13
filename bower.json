@@ -14,7 +14,7 @@
     "ember-qunit": "0.1.8",
     "ember-qunit-notifications": "^0.0.4",
     "qunit": "~1.15.0",
-    "ember-oauth2": "amkirwan/ember-oauth2#0.5.4"
+    "ember-oauth2": "amkirwan/ember-oauth2#0.5.5"
   },
   "devDependencies": {
     "sinon-browser-only": "~1.12.1"
