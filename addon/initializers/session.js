@@ -21,10 +21,10 @@ export function initialize(container, app) {
   session = container.lookup(session);
   for (var key in config) {
     if (config.hasOwnProperty(key)) {
-      var provider = OAuth2.create({providerId: key});
+      var auth = OAuth2.create({providerId: key});
       // load valid token if it exists and is not expired
-      if (provider.getAccessToken() && !provider.accessTokenIsExpired()) {
-        session.set('auth', provider);
+      if (auth.getAccessToken() && !auth.accessTokenIsExpired()) {
+        session.provider(key, auth);
         break;
       }
     }

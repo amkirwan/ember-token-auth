@@ -9,10 +9,13 @@ export default Ember.Object.extend({
     }
   },
   
-  provider: function(providerId) {
+  provider: function(providerId, auth) {
     if (arguments.length === 1) {
       this.set('providerId', providerId);
       this.set('auth', OAuth2.create({providerId: providerId}));
+    } else if (arguments.length === 2) {
+      this.set('providerId', providerId);
+      this.set('auth', auth);
     }
     return this.get('auth');
   },
