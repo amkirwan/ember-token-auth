@@ -59,5 +59,16 @@ export default Ember.Object.extend({
       if (response) resolve(response);
       else reject(response);
     });
+  },
+
+  signout: function() {
+    if (this.get('auth')) {
+      this.auth.removeToken();
+      this.set('auth', null);
+      this.set('providerId', null);
+    } else {
+      return null;
+    }
   }
+
 });
