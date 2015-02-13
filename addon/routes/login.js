@@ -2,7 +2,24 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
 
-  model: function() {
+  beforeModel: function(/*transition*/) {
+    if (this.get('session').isExpired()) {
+      this.set('provider', null);
+    }
+  },
+
+  model: function(/*params, transition*/) {
+    this.get('session');
+
+  },
+
+  setupController: function(controller/*, model*/) {
+    if (this.get('session').isExpired()) {
+      controller.set('currentUser', null);
+    }
+  },
+
+  authorize: function() {
     if (this.get('provider')) {
       var session = this.get('session');
       return session.authorize().then(function(response) {
@@ -13,13 +30,8 @@ export default Ember.Route.extend({
     }
   },
 
-  setupController: function(controller/*, model*/) {
-    if (this.get('session').isExpired()) {
-      controller.set('currentUser', null);
-    }
-  },
-
   actions: {
+
     authenticate: function(provider) {
       var router = this;
       var session = this.get('session');
@@ -42,8 +54,7 @@ export default Ember.Route.extend({
         Ember.Logger.error(error);
       });
 
-      // refresh the route model
-      router.refresh();
+      this.authorize();
     }
   }
 });
