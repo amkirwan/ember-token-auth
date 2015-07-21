@@ -1,0 +1,23 @@
+machine:
+  node:
+    version:
+      0.12.6
+
+dependencies:
+  pre:
+    - npm install -g ember-cli
+    - npm install -g bower
+    - npm install -g phantomjs
+  post:
+    - npm install
+    - bower install
+
+test:
+  pre:
+    - ember serve &
+  override: 
+    - mkdir -p $CIRCLE_TEST_REPORTS/testem
+    - ember test --silent > $CIRCLE_TEST_REPORTS/testem/results.xml
+  # fix report so it can be processed by ci server
+  post:
+    - sed -i -e 1,3d $CIRCLE_TEST_REPORTS/testem/results.xml
