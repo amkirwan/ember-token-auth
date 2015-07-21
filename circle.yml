@@ -14,7 +14,8 @@ dependencies:
 
 test:
   pre:
-    - ember serve &
+    - ember serve:
+        background: true
     - sleep 10
   override: 
     - mkdir -p $CIRCLE_TEST_REPORTS/testem
