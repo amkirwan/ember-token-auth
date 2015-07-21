@@ -5,7 +5,7 @@ var resolver = Resolver.create();
 
 resolver.namespace = {
   modulePrefix: config.modulePrefix,
-  prodModulePrefix: config.podModulePrefix
+  podModulePrefix: config.podModulePrefix
 };
 
 export default resolver;

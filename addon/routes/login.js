@@ -41,7 +41,7 @@ export default Ember.Route.extend({
       session.provider(provider);
 
       session.get('auth').on('success', function() {
-        router.controllerFor('session').loadUser().then(function(value) {
+        router.controllerFor('session').loadUser().then(function(/*value*/) {
         }, function(err) {
           Ember.Logger.error("Error: Cannot retrieve the current user.");
           Ember.Logger.error(err);

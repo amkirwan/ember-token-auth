@@ -1,28 +1,34 @@
 import Ember from 'ember';
 import DS from 'ember-data';
 import SessionAdapter from 'dummy/adapters/session';
+import Session from 'dummy/models/session';
 import User from 'dummy/models/user';
 import { test, moduleFor } from 'ember-qunit';
-import {auth, session, reopenConfig} from 'dummy/tests/helpers/ember-oauth2';
+import { auth, config } from 'dummy/tests/helpers/ember-oauth2';
+import { setupStore, createStore } from '../../helpers/store-helper';
 
 var container;
-var store;
-var sessionAdapter;
+var store; 
+var session;
 
 moduleFor('controller:session', 'SessionController', {
   setup: function() { 
-    container = new Ember.Container(); 
-    container.register('store:main', DS.Store.extend());
-    container.register('serializer:-default', DS.JSONSerializer);
-    container.register('serializer:-rest', DS.RESTSerializer);
-    container.register('adapter:-rest', DS.RESTAdapter);
-    container.register('adapter:session', SessionAdapter);
-    container.injection('serializer', 'store', 'store:main');
+    var env = setupStore();
+    var registry = env.registry;
+    container = env.container;
 
-    container.register('model:user', User);
-    store = container.lookup('store:main');
-    sessionAdapter = container.lookup('adapter:session');
-    sessionAdapter.set('session', session);
+    registry.register('adapter:session', SessionAdapter);
+    registry.register('model:user', User);
+
+    registry.register('session:current', Session, {singleton: true});
+    registry.injection('controller', 'session', 'session:current');
+    registry.injection('adapter', 'session', 'session:current');
+
+    session = container.lookup('session:current');
+    session.provider('testAuth', auth);
+
+    store = container.lookup('service:store');
+    store.set('adapter', '-json-api');
   }
 });
 
@@ -35,9 +41,8 @@ test('loadUser should set the currentUser', function() {
   expect(3); 
 
   var ctrl = this.subject();
-  ctrl.set('session', session);
-  ctrl.set('store', store);
   ctrl.set('container', container);
+  ctrl.set('store', store);
 
   ctrl.transitionToRoute = function() { return true; };
 

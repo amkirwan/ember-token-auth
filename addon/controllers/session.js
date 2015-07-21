@@ -29,25 +29,12 @@ export default Ember.Controller.extend({
     var adapter = this.get('container').lookup('adapter:session');
     return new Ember.RSVP.Promise(function(resolve, reject) {
       adapter.currentUser().then(function(json) {
-        var modelKey = null;
         var modelName = window.EmberENV['ember-oauth2']['model'];
-        for (var key in json) {
-          // key could be returned as plural if using JsonApi format.
-          if (modelName === Ember.String.singularize(key)) {
-            modelKey = key;
-          }
-        }
 
-        var user;
-        var data;
-
-        // if model name is pluralized it should be in an array, used for JSON API
-        if (modelKey === Ember.String.pluralize(modelName)) {
-          data = Ember.A(json[modelKey]).get('firstObject');
-          user = self.store.push(modelName, self.store.normalize(modelName, data));
-        } else {
-          data = json[modelKey];
-          user = self.store.push(modelName, self.store.normalize(modelName, data));
+        var user = null;
+        if (json['data']['type'] === modelName) {
+          self.store.pushPayload(json);
+          user = self.store.peekRecord('user', json['data']['id']);
         }
 
         if (user) {

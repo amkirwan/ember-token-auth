@@ -3,7 +3,7 @@ import OAuth2 from 'ember-oauth2';
 
 export var config = function() { 
   window.EmberENV['ember-oauth2'] = {
-    model: 'user',
+    model: 'users',
     testAuth: {
       clientId: '12345',
       authBaseUri: '/oauth/authorize',
