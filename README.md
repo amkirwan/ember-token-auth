@@ -101,9 +101,12 @@ export default Ember.View.extend({
 ## Running Ember-Token-Auth and the tests
 
 * `git clone https://github.com/amkirwan/ember-token-auth.git`
+* `npm install -g ember-cli bower phantomjs`
+* `npm install && bower install`
 * `ember serve`
 * visit `http://localhost:4200` to run the demo test dummy app.
 * visit `http://localhost:4200/tests` to run the tests
+
 
 ## Building
 
