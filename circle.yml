@@ -14,7 +14,7 @@ dependencies:
 
 test:
   pre:
-    - ember serve &
+    - ember serve
   override: 
     - mkdir -p $CIRCLE_TEST_REPORTS/testem
     - ember test --silent > $CIRCLE_TEST_REPORTS/testem/results.xml
