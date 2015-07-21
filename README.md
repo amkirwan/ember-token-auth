@@ -2,6 +2,8 @@
 
 Current Version: **[0.0.6](https://github.com/amkirwan/ember-token-auth/releases/tag/v0.0.6)**
 
+[![Circle CI](https://circleci.com/gh/amkirwan/ember-token-auth.svg?style=svg)](https://circleci.com/gh/amkirwan/ember-token-auth)
+
 ## Warning
 
 This is a work in progress, use at your own risk.
