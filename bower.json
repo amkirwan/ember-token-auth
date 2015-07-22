@@ -1,6 +1,6 @@
 {
   "name": "ember-token-auth",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "dependencies": {
     "jquery": "^1.11.1",
     "ember": "^1.13.4",
