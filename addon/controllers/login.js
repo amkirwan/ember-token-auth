@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  needs: ['session'],
-  sessionController: Ember.computed.alias('controllers.session'),
-  isAuthenticated: Ember.computed.alias('controllers.session.currentUser')
+  session: Ember.inject.controller(),
+  sessionController: Ember.computed.alias('session'),
+  isAuthenticated: Ember.computed.alias('session.currentUser')
 });

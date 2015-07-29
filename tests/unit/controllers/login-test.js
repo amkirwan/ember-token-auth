@@ -1,10 +1,22 @@
 import Ember from 'ember';
+import SessionController from 'dummy/controllers/session';
 import { test, moduleFor } from 'ember-qunit';
-import {auth, session, reopenConfig} from 'dummy/tests/helpers/ember-oauth2';
+import { setupStore, createStore } from '../../helpers/store-helper';
+
+var container;
+var registry;
 
 moduleFor('controller:login', 'LoginController', {
   // Specify the other units that are required for this test.
-  needs: ['controller:session'],
+  setup: function() {
+    var env = setupStore();
+    registry = env.registry;
+    container = env.container;
+
+    registry.register('controller:session', SessionController);
+    var sessionCtrl = container.lookup('controller:session');
+    this.subject().set('session', sessionCtrl);
+  }
 });
 
 // Replace this with your real tests.
@@ -15,7 +27,8 @@ test('it exists', function() {
 
 test('authenticated should return the currentUser when authenticated', function() {
   var ctrl = this.subject();
-  var sessionCtrl = ctrl.get('controllers.session');
+
+  var sessionCtrl = ctrl.get('session');
   equal(ctrl.get('isAuthenticated'), null);
 
   Ember.run(function() {
@@ -25,4 +38,3 @@ test('authenticated should return the currentUser when authenticated', function(
     equal(ctrl.get('isAuthenticated'), user);
   });
 });
-
