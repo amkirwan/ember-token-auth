@@ -1,45 +1,16 @@
 import Session from '../models/session';
-import OAuth2 from 'ember-oauth2';
+
+export function initialize(registry/*, app*/) {
+  registry.register('session:current', Session, { singleton: true });
+
+  registry.injection('controller', 'session', 'session:current');
+  registry.injection('route', 'session', 'session:current');
+  registry.injection('adapter', 'session', 'session:current');
+
+}
 
 export default {
   name: 'session',
   initialize: initialize,
   after: 'store'
 };
-
-export function initialize(container, app) {
-
-  app.deferReadiness(); 
-
-  var session = 'session:current';
-  container.register(session, Session, {singleton: true});
-  container.typeInjection('controller', 'session', session);
-  container.typeInjection('route', 'session', session);
-  container.typeInjection('adapter', 'session', session);
-
-  var config = window.EmberENV['ember-oauth2'];
-  session = container.lookup(session);
-  for (var key in config) {
-    if (config.hasOwnProperty(key)) {
-      var auth = OAuth2.create({providerId: key});
-      // load valid token if it exists and is not expired
-      if (auth.getAccessToken() && !auth.accessTokenIsExpired()) {
-        session.provider(key, auth);
-        break;
-      }
-    }
-  }
-
-  var sessionCtrl = container.lookup('controller:session');
-
-  // try and load the user if the session is still valid
-  if (session.get('auth.providerId')) {
-    sessionCtrl.loadUser(false).then(function() {
-      return app.advanceReadiness();
-    }, function() {
-      return app.advanceReadiness();
-    });
-  } else {
-    app.advanceReadiness();
-  }
-}
