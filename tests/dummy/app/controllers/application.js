@@ -1,5 +1,5 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  needs: ['session']
+  sessionCtrl: Ember.inject.controller('session')
 });
