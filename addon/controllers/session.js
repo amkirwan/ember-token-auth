@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   currentUser: null,
-  logginError: false,
+  loginError: false,
   isAuthenticated: function() {
     this.get('session').isNotExpired();
   }.property('session'),
@@ -38,7 +38,7 @@ export default Ember.Controller.extend({
         }
 
         if (user) {
-          self.set('logginError', false);
+          self.set('loginError', false);
           self.set('currentUser', user);
         }
 
@@ -46,7 +46,7 @@ export default Ember.Controller.extend({
 
         resolve(user);
       }, function(err) {
-        self.set('logginError', true);
+        self.set('loginError', true);
         reject(err);
       });
     });

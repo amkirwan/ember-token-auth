@@ -51,12 +51,12 @@ test('loadUser should set the currentUser', function() {
   stop();
   ctrl.loadUser().then(function() {
     start();
-    equal(ctrl.get('logginError'), false);
+    equal(ctrl.get('loginError'), false);
     equal(ctrl.get('currentUser').get('lastname'), 'bar');
   });
 });
 
-test('should set logginError to true when ajax fails', function() {
+test('should set loginError to true when ajax fails', function() {
   expect(1);
   var oldCurrentUserPath = session.auth.currentUser;
   session.auth.currentUser = session.auth.currentUserError;
@@ -70,7 +70,7 @@ test('should set logginError to true when ajax fails', function() {
     equal(data, null);
   }, function(error) {
     start();
-    equal(ctrl.get('logginError'), true);
+    equal(ctrl.get('loginError'), true);
   });
 
   session.auth.currentUser = oldCurrentUserPath;

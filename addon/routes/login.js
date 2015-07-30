@@ -49,7 +49,7 @@ export default Ember.Route.extend({
       });
 
       session.get('auth').on('error', function(error) {
-        router.controllerFor('session').set('logginError', true);
+        router.controllerFor('session').set('loginError', true);
         Ember.Logger.error("Error: Login rejected:");
         Ember.Logger.error(error);
       });
