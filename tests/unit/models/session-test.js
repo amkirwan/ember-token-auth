@@ -1,7 +1,6 @@
-import Ember from 'ember';
 import { test, moduleForModel } from 'ember-qunit';
 import Session from 'dummy/models/session';
-import {config, auth, reopenConfig} from 'dummy/tests/helpers/ember-oauth2';
+import { auth } from 'dummy/tests/helpers/ember-oauth2';
 
 var model;
 
@@ -12,52 +11,52 @@ moduleForModel('session:current', 'Session Model', {
   }
 });
 
-test('it exists', function() {
-  ok(model);
+test('it exists', function(assert) {
+  assert.ok(model);
 });
 
-test('return auth from provider if providerId given', function() {
-  equal(model.provider(), auth);
+test('return auth from provider if providerId given', function(assert) {
+  assert.equal(model.provider(), auth);
 });
 
-test('sets and returns the auth provider', function() {
+test('sets and returns the auth provider', function(assert) {
   var newAuth = model.provider(auth.get('providerId'));
-  equal(auth.get('providerId'), newAuth.get('providerId'));
+  assert.equal(auth.get('providerId'), newAuth.get('providerId'));
 });
 
-test('isExpired returns false when the token is not expired', function() {
+test('isExpired returns false when the token is not expired', function(assert) {
   var stub = sinon.stub(auth, 'accessTokenIsExpired', function() { return false; });
-  equal(model.isExpired(), false);
+  assert.equal(model.isExpired(), false);
   stub.restore();
 });
 
-test('isExpired returns true when the token is expired', function() {
+test('isExpired returns true when the token is expired', function(assert) {
   var stub = sinon.stub(auth, 'accessTokenIsExpired', function() { return true; });
-  equal(model.isExpired(), true);
+  assert.equal(model.isExpired(), true);
   stub.restore();
 });
 
-test('isNotExpired returns true when the token is expired', function() {
+test('isNotExpired returns true when the token is expired', function(assert) {
   var stub = sinon.stub(auth, 'accessTokenIsExpired', function() { return false; });
-  equal(model.isNotExpired(), true);
+  assert.equal(model.isNotExpired(), true);
   stub.restore();
 });
 
-test('isNotExpired returns false when the token is expired', function() {
+test('isNotExpired returns false when the token is expired', function(assert) {
   var stub = sinon.stub(auth, 'accessTokenIsExpired', function() { return true; });
-  equal(model.isNotExpired(), false);
+  assert.equal(model.isNotExpired(), false);
   stub.restore();
 });
 
-test('getToken returns the oauth token', function() {
+test('getToken returns the oauth token', function(assert) {
   var stub = sinon.stub(auth, 'getToken', function() { return '12345'; });
-  equal(model.getToken(), '12345');
+  assert.equal(model.getToken(), '12345');
   stub.restore();
 });
 
-test('authorize calls authorize method on auth object', function() {
+test('authorize calls authorize method on auth object', function(assert) {
   var mock = sinon.mock(auth);
   mock.expects('authorize').once();
   model.authorize();
-  ok(mock.verify());
+  assert.ok(mock.verify());
 });

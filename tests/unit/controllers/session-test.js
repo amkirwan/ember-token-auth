@@ -1,11 +1,9 @@
-import Ember from 'ember';
-import DS from 'ember-data';
 import SessionAdapter from 'dummy/adapters/session';
 import Session from 'dummy/models/session';
 import User from 'dummy/models/user';
 import { test, moduleFor } from 'ember-qunit';
-import { auth, config } from 'dummy/tests/helpers/ember-oauth2';
-import { setupStore, createStore } from '../../helpers/store-helper';
+import { auth } from 'dummy/tests/helpers/ember-oauth2';
+import { setupStore } from '../../helpers/store-helper';
 
 var container;
 var store; 
@@ -32,13 +30,13 @@ moduleFor('controller:session', 'SessionController', {
   }
 });
 
-test('it exists', function() {
+test('it exists', function(assert) {
   var controller = this.subject();
-  ok(controller);
+  assert.ok(controller);
 });
 
-test('loadUser should set the currentUser', function() {
-  expect(3); 
+test('loadUser should set the currentUser', function(assert) {
+  assert.expect(3); 
 
   var ctrl = this.subject();
   ctrl.set('container', container);
@@ -46,18 +44,16 @@ test('loadUser should set the currentUser', function() {
 
   ctrl.transitionToRoute = function() { return true; };
 
-  equal(ctrl.get('currentUser'), null);
+  assert.equal(ctrl.get('currentUser'), null);
 
-  stop();
   ctrl.loadUser().then(function() {
-    start();
-    equal(ctrl.get('loginError'), false);
-    equal(ctrl.get('currentUser').get('lastname'), 'bar');
+    assert.equal(ctrl.get('loginError'), false);
+    assert.equal(ctrl.get('currentUser').get('lastname'), 'bar');
   });
 });
 
-test('should set loginError to true when ajax fails', function() {
-  expect(1);
+test('should set loginError to true when ajax fails', function(assert) {
+  assert.expect(1);
   var oldCurrentUserPath = session.auth.currentUser;
   session.auth.currentUser = session.auth.currentUserError;
 
@@ -65,12 +61,10 @@ test('should set loginError to true when ajax fails', function() {
   ctrl.set('session', session);
   ctrl.set('container', container);
 
-  stop();
   ctrl.loadUser().then(function(data) {
-    equal(data, null);
-  }, function(error) {
-    start();
-    equal(ctrl.get('loginError'), true);
+    assert.equal(data, null);
+  }, function() {
+    assert.equal(ctrl.get('loginError'), true);
   });
 
   session.auth.currentUser = oldCurrentUserPath;

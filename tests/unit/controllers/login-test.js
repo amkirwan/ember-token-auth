@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import SessionController from 'dummy/controllers/session';
 import { test, moduleFor } from 'ember-qunit';
-import { setupStore, createStore } from '../../helpers/store-helper';
+import { setupStore } from '../../helpers/store-helper';
 
 var container;
 var registry;
@@ -20,21 +20,21 @@ moduleFor('controller:login', 'LoginController', {
 });
 
 // Replace this with your real tests.
-test('it exists', function() {
+test('it exists', function(assert) {
   var controller = this.subject();
-  ok(controller);
+  assert.ok(controller);
 });
 
-test('authenticated should return the currentUser when authenticated', function() {
+test('authenticated should return the currentUser when authenticated', function(assert) {
   var ctrl = this.subject();
 
   var sessionCtrl = ctrl.get('session');
-  equal(ctrl.get('isAuthenticated'), null);
+  assert.equal(ctrl.get('isAuthenticated'), null);
 
   Ember.run(function() {
     var user = Ember.Object.create();
     sessionCtrl.set('currentUser', user);
 
-    equal(ctrl.get('isAuthenticated'), user);
+    assert.equal(ctrl.get('isAuthenticated'), user);
   });
 });
