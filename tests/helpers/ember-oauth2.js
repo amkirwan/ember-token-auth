@@ -30,7 +30,8 @@ export var savedStateConfig = function () {
   };
 };
 
-var c = config();
+config();
+
 export var auth = OAuth2.create({providerId: 'testAuth'});
 export var session = Ember.Object.create({provider: function() {return true;}, auth: auth});
 
