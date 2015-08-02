@@ -3,9 +3,9 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   currentUser: null,
   loginError: false,
-  isAuthenticated: function() {
-    this.get('session').isNotExpired();
-  }.property('session'),
+  isAuthenticated: Ember.computed('session', function() {
+    return this.get('session').isNotExpired();
+  }),
 
   savedTransition: function(handleTransition) {
     // make handleTransition the default
