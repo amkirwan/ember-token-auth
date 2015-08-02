@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import OAuth2 from 'ember-oauth2';
+import { module, test } from 'qunit';
 import startApp from '../helpers/start-app';
 
 var App;

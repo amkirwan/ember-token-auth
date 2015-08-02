@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { module, test } from 'qunit';
 import startApp from '../helpers/start-app';
 
 var App;
@@ -17,20 +18,20 @@ module('Acceptance: Protected', {
   }
 });
 
-test('visiting /foobar', function() {
+test('visiting /foobar', function(assert) {
   visit('/foobar');
 
   andThen(function() {
-    equal(currentPath(), 'login');
+    assert.equal(currentPath(), 'login');
   });
 });
 
-test('visiting /foobar then logging should redirect back to /foobar', function() {
+test('visiting /foobar then logging should redirect back to /foobar', function(assert) {
   visit('/foobar');
   click('button#login');
 
 
   andThen(function() {
-    equal(currentPath(), 'foobar');
+    assert.equal(currentPath(), 'foobar');
   });
 });

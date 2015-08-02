@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { module, test } from 'qunit';
 import startApp from '../helpers/start-app';
 
 var App;
@@ -16,10 +17,10 @@ module('Acceptance: Index', {
   }
 });
 
-test('visiting /', function() {
+test('visiting /', function(assert) {
   visit('/');
 
   andThen(function() {
-    equal(currentPath(), 'index');
+    assert.equal(currentPath(), 'index');
   });
 });
