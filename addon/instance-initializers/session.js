@@ -3,10 +3,6 @@ import OAuth2 from 'ember-oauth2';
 export function initialize(app) {
   var session = app.container.lookup('session:current');
 
-  // app.inject('controller', 'session', session);
-  // app.inject('route', 'session', session);
-  // app.inject('adapter', 'session', session);
-
   var config = window.EmberENV['ember-oauth2'];
 
   for (var key in config) {
