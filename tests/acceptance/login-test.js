@@ -18,20 +18,20 @@ module('Acceptance: Login', {
   }
 });
 
-test('visiting /login when there is not valid login should not redirect', function() {
+test('visiting /login when there is not valid login should not redirect', function(assert) {
   visit('/login');
 
   andThen(function() {
-    equal(currentURL(), '/login');
+    assert.equal(currentURL(), '/login');
   });
 });
 
-test('visiting /login should redirect to index when there is a valid login', function() {
+test('visiting /login should redirect to index when there is a valid login', function(assert) {
   visit('/login');
   click('button#login');
 
   andThen(function() {
-    equal(currentURL(), '/');
+    assert.equal(currentURL(), '/');
   });
 });
 
