@@ -8,8 +8,8 @@ export var config = function() {
       clientId: '12345',
       authBaseUri: '/oauth/authorize',
       redirectUri: '/oauth/callback',
-      currentUser: '/api/current_user',
-      currentUserError: '/api/current_user_error', 
+      currentUser: '/api/current-user',
+      currentUserError: '/api/current-user-error', 
       tokeninfo: '/oauth/token/info',
       scope: 'public'
     }

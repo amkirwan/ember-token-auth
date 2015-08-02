@@ -4,5 +4,5 @@ module.exports = function(app) {
   currentUserRouter.get('/', function(req, res) {
     res.status(200).send({"data":{"type":"users","id":"1","attributes":{"firstname":"foo","lastname":"bar"}}});
   });
-  app.use('/api/current_user', currentUserRouter);
+  app.use('/api/current-user', currentUserRouter);
 };

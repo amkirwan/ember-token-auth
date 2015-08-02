@@ -4,5 +4,5 @@ module.exports = function(app) {
   currentUserRouter.get('/', function(req, res) {
     res.status(500).send({"errors":[{"id":"1","status":"500","title":"internal_service_error","detail":"internal_service_error_detail"}]})
   });
-  app.use('/api/current_user_error', currentUserRouter);
+  app.use('/api/current-user-error', currentUserRouter);
 };
