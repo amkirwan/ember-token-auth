@@ -35,25 +35,7 @@ test('visiting /login should redirect to index when there is a valid login', fun
   });
 });
 
-test('login fails', function() {
-  OAuth2.reopen({
-    openWindow: function() {
-      return new Ember.RSVP.Promise(function(resolve,reject) {
-        reject(new Error('Opening dialog login window failed.'));
-      });
-    }
-  });
-
-  visit('/login');
-  click('button#login');
-
-  andThen(function() {
-    equal(currentURL(), '/login');
-    equal(find('p.error').text(), 'There was an error logging in. Please try again.');
-  });
-});
-
-test('logging in is successful but current_user returns error', function() {
+test('logging in is successful but current_user returns error', function(assert) {
 
   window.EmberENV['ember-oauth2'].testAuth.currentUser = window.EmberENV['ember-oauth2'].testAuth.currentUserError;
 
@@ -61,7 +43,7 @@ test('logging in is successful but current_user returns error', function() {
   click('button#login');
 
   andThen(function() {
-    equal(currentURL(), '/login');
-    equal(find('p.error').text(), 'There was an error logging in. Please try again.');
+    assert.equal(currentURL(), '/login');
+    assert.equal(find('p.error').text(), 'There was an error logging in. Please try again.');
   });
 });
