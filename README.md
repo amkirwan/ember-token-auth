@@ -74,6 +74,14 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   needs: ['session']
 });
+
+// or new Ember syntax
+
+import Ember from 'ember';
+
+export default Ember.Controller.extend({
+  sessionCtrl: Ember.inject.controller('session')
+});
 ```
 
 The current implementation looks for a User model for storing the current logged in user. Overriding this
@@ -85,18 +93,33 @@ model in your App to config your user.
 If there is an error authorizing the user and getting the user information the session controller will set the loginError property defined in it to true. One way to handle the loggin error is to define a session view the observes the controllers loginError property. Here is one way to show the user that an error occurred logging in: 
 
 ```javascript
+// app/templates/application.hbs
+<h2 id='title'>Welcome to Ember.js</h2>
+
+{{current-session currentUser=sessionCtrl.currentUser loginError=sessionCtrl.loginError}}
+
+{{outlet}}
+
+
+// app/components/current-session.js
+
 import Ember from 'ember';
 
-export default Ember.View.extend({
-  templateName: 'session',
+export default Ember.Component.extend({
+  classNames: ['current-user'],
+  loginError: false,
 
-  loginError: function() {
-    if (this.get('controller.loginError')) {
+  didInsertElement: function() {
+    Ember.addObserver(this, 'loginError', this, this.loginErrorChanged);
+  },
+
+  loginErrorChanged: function(/*comp, value*/) {
+    if (this.get('loginError')) {
       Ember.run.once(this, function() {
-        Ember.$('#current-user').html('<p classs="error">There was an error logging in.</p>');
+        Ember.$('.current-user').html('<p class="error">There was an error logging in. Please try again.</p>');
       });
     }
-  }.observes('controller.loginError')
+  }
 });
 ```
 
