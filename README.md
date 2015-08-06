@@ -56,7 +56,9 @@ To create a protected route that requires authentication define your routes like
 
 import Protected from './routes/protected';
 
-export default Protected.extend();
+export default Protected.extend({
+  // your route 
+});
 ```
 
 Depending on the needs of your app you can create a protected route by importing it from `ember-token-auth` a few different ways. For more information checkout the [EmberCli Addon](http://www.ember-cli.com/#developing-addons-and-blueprints) docs.
@@ -75,17 +77,13 @@ Add the Session controller available to your controllers in the `Application.js`
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  needs: ['session']
-});
-
-// or new Ember syntax
-
-import Ember from 'ember';
-
-export default Ember.Controller.extend({
   sessionCtrl: Ember.inject.controller('session')
+  currentUser: Ember.computed.alias("sessionCtrl.currentUser")
 });
 ```
+
+Injecting the session controller gives you access to the `currentUser`, `loginError`, and `isAuthenticated` attributes of the session controller.
+
 
 The current implementation looks for a User model for storing the current logged in user. Overriding this
 model in your App to config your user. 
