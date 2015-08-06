@@ -4,9 +4,6 @@ Current Version: **[0.0.9](https://github.com/amkirwan/ember-token-auth/releases
 
 [![Circle CI](https://circleci.com/gh/amkirwan/ember-token-auth.svg?style=svg)](https://circleci.com/gh/amkirwan/ember-token-auth)
 
-## Warning
-
-This is a work in progress, use at your own risk.
 
 This is an [EmberCli](http://www.ember-cli.com/#developing-addons-and-blueprints) addon that demonstrates how to use [Ember-OAuth2](https://github.com/amkirwan/ember-oauth2) library for authentication in you app. 
 
