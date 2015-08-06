@@ -1,6 +1,6 @@
 {
   "name": "ember-token-auth",
-  "version": "0.0.9",
+  "version": "1.0.0",
   "description": "The default blueprint for ember-cli addons.",
   "directories": {
     "doc": "doc",
