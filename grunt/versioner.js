@@ -8,7 +8,16 @@ module.exports = {
     files: {
       './package.json': [ './package.json'], 
       './bower.json': ['./bower.json'], 
-      './README.md': ['./README.md']
+      './README.md': ['./README.md'],
+      './VERSION': [ './VERSION' ]
+    }
+  }
+  git: {
+    options: {
+      versionType: 'git',
+    },
+    files: {
+      './VERSION': [ './VERSION' ]
     }
   }
 }

@@ -16,7 +16,7 @@ module.exports = function(grunt) {
   grunt.registerTask('release:major', ['versioner:bumpOnly:default:major', 'versioner:commitOnly:default']);
   grunt.registerTask('latest-build:git', ['versioner:bumpOnly:default:git']);
 
-  grunt.registerTask('release:npm', ['versioner:npmOnly:default']);
+  grunt.registerTask('release:npm', ['versioner:bumpOnly:git']);
 
   grunt.initConfig(config);
 };
