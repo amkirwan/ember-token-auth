@@ -3,29 +3,28 @@ import Ember from 'ember';
 export default Ember.Route.extend({
 
   beforeModel: function(/*transition*/) {
-    if (this.get('session').isExpired()) {
+    if (this.get('sessionCurrent').isExpired()) {
       this.set('provider', null);
     }
   },
 
   model: function(/*params, transition*/) {
-    this.get('session');
-
+    return this.get('sessionCurrent');
   },
 
   setupController: function(controller/*, model*/) {
-    if (this.get('session').isExpired()) {
+    if (this.get('sessionCurrent').isExpired()) {
       controller.set('currentUser', null);
     }
   },
 
   authorize: function() {
     if (this.get('provider')) {
-      var session = this.get('session');
-      return session.authorize().then(function(response) {
-        session.get('auth').trigger('redirect', response);
+      var sessionCurrent = this.get('sessionCurrent');
+      return sessionCurrent.authorize().then(function(response) {
+        sessionCurrent.get('auth').trigger('redirect', response);
       }, function(error) {
-        session.get('auth').trigger('error', error);
+        sessionCurrent.get('auth').trigger('error', error);
       });
     }
   },
@@ -34,13 +33,13 @@ export default Ember.Route.extend({
 
     authenticate: function(provider) {
       var router = this;
-      var session = this.get('session');
+      var sessionCurrent = this.get('sessionCurrent');
 
       // set the provider
       router.set('provider', provider);
-      session.provider(provider);
+      sessionCurrent.provider(provider);
 
-      session.get('auth').on('success', function() {
+      sessionCurrent.get('auth').on('success', function() {
         router.controllerFor('session').loadUser().then(function(/*value*/) {
         }, function(err) {
           Ember.Logger.error("Error: Cannot retrieve the current user.");
@@ -48,7 +47,7 @@ export default Ember.Route.extend({
         });
       });
 
-      session.get('auth').on('error', function(error) {
+      sessionCurrent.get('auth').on('error', function(error) {
         router.controllerFor('session').set('loginError', true);
         Ember.Logger.error("Error: Login rejected:");
         Ember.Logger.error(error);

@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   beforeModel: function(transition) {
-    if (this.session.isExpired() && location.pathname !== '/login') {
+    if (this.get('sessionCurrent').isExpired() && location.pathname !== '/login') {
 
       var sessionController = this.controllerFor('session');
       if (sessionController.get('previousTransition') !== null) {
