@@ -19,8 +19,8 @@ moduleFor('controller:session', 'SessionController', {
     registry.register('model:user', User);
 
     registry.register('session:current', Session, {singleton: true});
-    registry.injection('controller', 'session', 'session:current');
-    registry.injection('adapter', 'session', 'session:current');
+    registry.injection('controller', 'sessionCurrent', 'session:current');
+    registry.injection('adapter', 'sessionCurrent', 'session:current');
 
     sessionCurrent = container.lookup('session:current');
     sessionCurrent.provider('testAuth', auth);
