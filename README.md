@@ -22,26 +22,32 @@ Create an initialzier to setup your Ember-OAuth2 config. For more information ch
 
 In addition you will need to set the name of the model that the user should be persisted to. In the example setup it is set to `user`.
 
+The intializer should be configured to run `before` the `session` initializer
+
 ```javascript 
 import Ember from 'ember';
 import OAuth2 from 'ember-oauth2';
 
-export default {
-  name 'ember-oauth2-config', 
-
-  initialize: function(/*container, app*/) {
-    window.EmberENV['ember-oauth2'] = {
-      model: 'user',
-      google: {
-        clientId: "xxxxxxxxxxxx",
-        authBaseUri: 'https://accounts.google.com/o/oauth2/auth',
-        redirectUri: 'https://oauth2-login-demo.appspot.com/oauth/callback',
-        scope: 'public write'
-      }
-    };
+export function initialize(registry, app) {
+  window.EmberENV['ember-oauth2'] = {
+    model: 'user',
+    google: {
+      clientId: "xxxxxxxxxxxx",
+      authBaseUri: 'https://accounts.google.com/o/oauth2/auth',
+      redirectUri: 'https://oauth2-login-demo.appspot.com/oauth/callback',
+      scope: 'public write'
+    }
   }
 }
+
+export default {
+  name: 'ember-oauth2-config', 
+  before: 'session',
+  initialize: initialize
+}
 ```
+
+Ember-Token-Auth addons `session` initializer injects the sessionCurrent object into `controller`, `route` and `adapter` in your application.
 
 To create a protected route that requires authentication define your routes like this: 
 
