@@ -11,7 +11,7 @@ module.exports = {
       './README.md': ['./README.md'],
       './VERSION': [ './VERSION' ]
     }
-  }
+  },
   git: {
     options: {
       versionType: 'git',
