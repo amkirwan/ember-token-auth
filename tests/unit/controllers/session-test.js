@@ -2,7 +2,6 @@ import SessionAdapter from 'dummy/adapters/session';
 import Session from 'dummy/models/session';
 import User from 'dummy/models/user';
 import { test, moduleFor } from 'ember-qunit';
-import { auth } from 'dummy/tests/helpers/ember-oauth2';
 import { setupStore } from '../../helpers/store-helper';
 
 var container;
@@ -23,7 +22,7 @@ moduleFor('controller:session', 'SessionController', {
     registry.injection('adapter', 'sessionCurrent', 'session:current');
 
     sessionCurrent = container.lookup('session:current');
-    sessionCurrent.provider('testAuth', auth);
+    sessionCurrent.set('provider', 'testAuth');
 
     store = container.lookup('service:store');
     store.set('adapter', '-json-api');

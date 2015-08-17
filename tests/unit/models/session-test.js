@@ -16,11 +16,11 @@ test('it exists', function(assert) {
 });
 
 test('return auth from provider if providerId given', function(assert) {
-  assert.equal(model.provider(), auth);
+  assert.equal(model.get('provider'), auth);
 });
 
 test('sets and returns the auth provider', function(assert) {
-  var newAuth = model.provider(auth.get('providerId'));
+  var newAuth = model.set('provider', auth.get('providerId'));
   assert.equal(auth.get('providerId'), newAuth.get('providerId'));
 });
 

@@ -37,7 +37,7 @@ export default Ember.Route.extend({
 
       // set the provider
       router.set('provider', provider);
-      sessionCurrent.provider(provider);
+      sessionCurrent.set('provider', provider);
 
       sessionCurrent.get('auth').on('success', function() {
         router.controllerFor('session').loadUser().then(function(/*value*/) {
