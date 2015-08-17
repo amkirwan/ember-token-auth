@@ -8,17 +8,17 @@ export default Ember.Object.extend({
       this.set('auth', OAuth2.create({providerId: this.get('providerId')}));
     }
   },
-  
-  provider: function(providerId, auth) {
-    if (arguments.length === 1) {
-      this.set('providerId', providerId);
-      this.set('auth', OAuth2.create({providerId: providerId}));
-    } else if (arguments.length === 2) {
-      this.set('providerId', providerId);
-      this.set('auth', auth);
+
+  provider: Ember.computed('auth', {
+    /*jshint unused: false*/
+    get(key) {
+      return this.get('auth');
+    },
+    set(key, value) {
+      this.set('providerId', value);
+      this.set('auth', OAuth2.create({providerId: value}));
     }
-    return this.get('auth');
-  },
+  }),
 
   isExpired: function() {
     if (this.get('auth')) {
