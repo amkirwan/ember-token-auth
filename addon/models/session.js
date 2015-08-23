@@ -20,16 +20,22 @@ export default Ember.Object.extend({
     }
   }),
 
-  isExpired: Ember.computed('auth', function() {
-    if (this.get('auth')) {
-      return this.get('auth').accessTokenIsExpired();
-    } else {
-      return true;
+  isExpired: Ember.computed('auth', {
+    /*jshint unused: false*/
+    get(key) {
+      if (this.get('auth')) {
+        return this.get('auth').accessTokenIsExpired();
+      } else {
+        return true;
+      }
     }
   }),
 
-  isNotExpired: Ember.computed('isExpired', function() {
-    return !this.get('isExpired');
+  isNotExpired: Ember.computed('isExpired', {
+    /*jshint unused: false*/
+    get(key) {
+      return !this.get('isExpired');
+    }
   }),
 
   getToken: function() {
