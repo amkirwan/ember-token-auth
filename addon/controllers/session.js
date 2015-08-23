@@ -4,7 +4,7 @@ export default Ember.Controller.extend({
   currentUser: null,
   loginError: false,
   isAuthenticated: Ember.computed('sessionCurrent', function() {
-    return this.get('sessionCurrent').isNotExpired();
+    return this.get('sessionCurrent.isNotExpired');
   }),
 
   savedTransition: function(handleTransition) {

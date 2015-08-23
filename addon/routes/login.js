@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Route.extend({
 
   beforeModel: function(/*transition*/) {
-    if (this.get('sessionCurrent').isExpired()) {
+    if (this.get('sessionCurrent.isExpired')) {
       this.set('provider', null);
     }
   },
@@ -13,7 +13,7 @@ export default Ember.Route.extend({
   },
 
   setupController: function(controller/*, model*/) {
-    if (this.get('sessionCurrent').isExpired()) {
+    if (this.get('sessionCurrent.isExpired')) {
       controller.set('currentUser', null);
     }
   },

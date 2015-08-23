@@ -31,25 +31,25 @@ test('sets and returns the auth provider', function(assert) {
 
 test('isExpired returns false when the token is not expired', function(assert) {
   var stub = sinon.stub(auth, 'accessTokenIsExpired', function() { return false; });
-  assert.equal(model.isExpired(), false);
+  assert.equal(model.get('isExpired'), false);
   stub.restore();
 });
 
 test('isExpired returns true when the token is expired', function(assert) {
   var stub = sinon.stub(auth, 'accessTokenIsExpired', function() { return true; });
-  assert.equal(model.isExpired(), true);
+  assert.equal(model.get('isExpired'), true);
   stub.restore();
 });
 
 test('isNotExpired returns true when the token is expired', function(assert) {
   var stub = sinon.stub(auth, 'accessTokenIsExpired', function() { return false; });
-  assert.equal(model.isNotExpired(), true);
+  assert.equal(model.get('isNotExpired'), true);
   stub.restore();
 });
 
 test('isNotExpired returns false when the token is expired', function(assert) {
   var stub = sinon.stub(auth, 'accessTokenIsExpired', function() { return true; });
-  assert.equal(model.isNotExpired(), false);
+  assert.equal(model.get('isNotExpired'), false);
   stub.restore();
 });
 
