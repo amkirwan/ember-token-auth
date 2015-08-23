@@ -15,6 +15,11 @@ test('it exists', function(assert) {
   assert.ok(model);
 });
 
+test('create the session and set the auth object', function(assert) {
+  var m = Session.create({providerId: 'testAuth'});
+  assert.deepEqual(m.get('provider'), auth);
+});
+
 test('return auth from provider if providerId given', function(assert) {
   assert.equal(model.get('provider'), auth);
 });
