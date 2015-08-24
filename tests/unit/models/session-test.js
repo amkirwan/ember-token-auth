@@ -60,14 +60,16 @@ test('isNotExpired returns false when the token is expired', function(assert) {
 });
 
 test('token property returns the oauth token', function(assert) {
-  var stub = sinon.stub(auth, 'getToken', function() { return '12345'; });
-  assert.equal(model.get('token'), '12345');
+  let token = { provider_id: 'testAuth', expires_in: '12345', scope: 'public', access_token: '12345abc' };
+  let stub = sinon.stub(auth, 'getToken', function() { return token; });
+  assert.equal(model.get('token'), token);
   stub.restore();
 });
 
 test('getToken returns the oauth token', function(assert) {
-  var stub = sinon.stub(auth, 'getToken', function() { return '12345'; });
-  assert.equal(model.getToken(), '12345');
+  let token = { provider_id: 'testAuth', expires_in: '12345', scope: 'public', access_token: '12345abc' };
+  let stub = sinon.stub(auth, 'getToken', function() { return token; });
+  assert.equal(model.getToken(), token);
   stub.restore();
 });
 
