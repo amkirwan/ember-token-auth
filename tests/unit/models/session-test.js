@@ -29,6 +29,12 @@ test('sets and returns the auth provider', function(assert) {
   assert.equal(auth.get('providerId'), newAuth.get('providerId'));
 });
 
+test('sets and returns the auth provider', function(assert) {
+  model.set('provider', null);
+  assert.ok(!model.get('provider'));
+  assert.ok(!model.get('auth'));
+});
+
 test('isExpired returns false when the token is not expired', function(assert) {
   var stub = sinon.stub(auth, 'accessTokenIsExpired', function() { return false; });
   assert.equal(model.get('isExpired'), false);

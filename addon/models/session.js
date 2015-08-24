@@ -16,7 +16,12 @@ export default Ember.Object.extend({
     },
     set(key, value) {
       this.set('providerId', value);
-      this.set('auth', OAuth2.create({providerId: value}));
+      // check if the value is falsey ie: most likely set to null
+      if (value) {
+        this.set('auth', OAuth2.create({providerId: value}));
+      } else {
+        this.set('auth', value);
+      }
     }
   }),
 
