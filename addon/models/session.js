@@ -38,6 +38,13 @@ export default Ember.Object.extend({
     }
   }),
 
+  token: Ember.computed('auth', {
+    /*jshint unused: false*/
+    get(key) {
+      return this.get('auth') ? this.get('auth').getToken() : null;
+    }
+  }),
+
   getToken: function() {
     if (this.get('auth')) {
       return this.auth.getToken();

@@ -53,6 +53,12 @@ test('isNotExpired returns false when the token is expired', function(assert) {
   stub.restore();
 });
 
+test('token returns the oauth token', function(assert) {
+  var stub = sinon.stub(auth, 'getToken', function() { return '12345'; });
+  assert.equal(model.get('token'), '12345');
+  stub.restore();
+});
+
 test('getToken returns the oauth token', function(assert) {
   var stub = sinon.stub(auth, 'getToken', function() { return '12345'; });
   assert.equal(model.getToken(), '12345');
