@@ -62,6 +62,13 @@ export default Ember.Object.extend({
     }
   },
 
+  accessToken: Ember.computed('auth', {
+    /*jshint unused: false*/
+    get(key) {
+      return this.get('auth') ? this.get('auth').getAccessToken() : false;
+    }
+  }),
+
   getAccessToken: function() {
     if (this.get('auth')) {
       return this.auth.getAccessToken();

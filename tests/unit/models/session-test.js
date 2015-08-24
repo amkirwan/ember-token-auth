@@ -73,6 +73,13 @@ test('getToken returns the oauth token', function(assert) {
   stub.restore();
 });
 
+test('accessToken returns the oauth token', function(assert) {
+  let token = { provider_id: 'testAuth', expires_in: '12345', scope: 'public', access_token: '12345abc' };
+  let stub = sinon.stub(auth, 'getAccessToken', function() { return token.access_token; });
+  assert.equal(model.get('accessToken'), token.access_token);
+  stub.restore();
+});
+
 test('getAccessToken returns the oauth token', function(assert) {
   let token = { provider_id: 'testAuth', expires_in: '12345', scope: 'public', access_token: '12345abc' };
   let stub = sinon.stub(auth, 'getAccessToken', function() { return token.access_token; });
