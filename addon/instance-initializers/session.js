@@ -1,4 +1,3 @@
-import OAuth2 from 'ember-oauth2';
 
 export function initialize(app) {
   var session = app.container.lookup('session:current');
@@ -7,10 +6,11 @@ export function initialize(app) {
 
   for (var key in config) {
     if (config.hasOwnProperty(key)) {
-      var auth = OAuth2.create({providerId: key});
-      // load valid token if it exists and is not expired
-      if (auth.getAccessToken() && !auth.accessTokenIsExpired()) {
-        session.provider(key, auth);
+      session.set('provider',  key);
+      // sets session providerId and auth to null if expired
+      if (session.get('isExpired')) { 
+        session.set('provider', null);
+      } else {
         break;
       }
     }
