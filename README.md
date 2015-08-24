@@ -1,11 +1,11 @@
-# Ember-token-auth
+# Ember-Token-Auth
 
 Current Version: **[1.0.0](https://github.com/amkirwan/ember-token-auth/releases/tag/v1.0.0)**
 
 [![Circle CI](https://circleci.com/gh/amkirwan/ember-token-auth.svg?style=svg)](https://circleci.com/gh/amkirwan/ember-token-auth)
 
 
-This is an [EmberCli](http://www.ember-cli.com/#developing-addons-and-blueprints) addon that demonstrates how to use [Ember-OAuth2](https://github.com/amkirwan/ember-oauth2) library for authentication in you app. 
+This is an [EmberCli](http://www.ember-cli.com/) addon for using the [Ember-OAuth2](https://github.com/amkirwan/ember-oauth2) to handle authentication in your app. 
 
 ## Installation
 
@@ -82,28 +82,50 @@ export default Ember.Controller.extend({
 });
 ```
 
+Then from your template you just need to handle the `authenticate` method and pass in the providerId to start the authentication process.
+
+```handlebars
+<h2>Ember Token Auth</h2>
+
+<button id="login" {{action 'authenticate' 'google'}}>Sign In</button>
+```
+
 Injecting the session controller gives you access to the `currentUser`, `loginError`, and `isAuthenticated` attributes of the session controller.
 
 
-The current implementation looks for a User model for storing the current logged in user. Overriding this
-model in your App to config your user. 
+The current implementation looks for a User model for storing the current logged in user. Over this model in your App to config your user. 
 
+**Session Model**
+
+The session model provides the interface for handling session data via [Ember-OAuth2](https://github.com/amkirwan/ember-oauth2). If you need to interact with the session it provides the following properties:
+
+*methods*
+- authorize - Returns a promise with the resolved or rejected response
+- signout -  Removes the token from the localstorage and sets the auth and providerId to null on the session model
+
+*properties*
+- provider - You can set the provider with the providerId from the OAuth2 config
+- isExpired - Returns true if the accessToken is expired otherwise false 
+- isNoExpired - Returns true if the accessToken is not expired otherwise false
+- token - Return the the token from localstorage saved by EmberOAuth2 if it exists otherwise null
+- accessToken - Return the access token property value from the token saved in localstorage
 
 ### Optional Config
 
 If there is an error authorizing the user and getting the user information the session controller will set the loginError property defined in it to true. One way to handle the loggin error is to define a session view the observes the controllers loginError property. Here is one way to show the user that an error occurred logging in: 
 
+*app/templates/application.hbs*
 ```javascript
-// app/templates/application.hbs
 <h2 id='title'>Welcome to Ember.js</h2>
 
 {{current-session currentUser=sessionCtrl.currentUser loginError=sessionCtrl.loginError}}
 
 {{outlet}}
+```
 
 
-// app/components/current-session.js
-
+*app/components/current-session.js*
+```javascript
 import Ember from 'ember';
 
 export default Ember.Component.extend({
