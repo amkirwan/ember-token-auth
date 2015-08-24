@@ -51,8 +51,12 @@ export default Ember.Object.extend({
   }),
 
   getToken: function() {
+    Ember.deprecate('Use the Session property token instead of getToken() method. Will be removed in version 2.0', false, {
+      id: 'model.session.getToken()',
+      until: '2.0.0'
+    });
     if (this.get('auth')) {
-      return this.auth.getToken();
+      return this.get('auth').getToken();
     } else {
       return null;
     }
