@@ -70,6 +70,10 @@ export default Ember.Object.extend({
   }),
 
   getAccessToken: function() {
+    Ember.deprecate('Use the Session property accessToken instead of getAccessToken() method. Will be removed in version 2.0', false, {
+      id: 'model.session.getAccessToken()',
+      until: '2.0.0'
+    });
     if (this.get('auth')) {
       return this.auth.getAccessToken();
     } else {
