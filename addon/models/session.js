@@ -50,36 +50,12 @@ export default Ember.Object.extend({
     }
   }),
 
-  getToken: function() {
-    Ember.deprecate('Use the Session property token instead of getToken() method. Will be removed in version 2.0', false, {
-      id: 'model.session.getToken()',
-      until: '2.0.0'
-    });
-    if (this.get('auth')) {
-      return this.get('auth').getToken();
-    } else {
-      return null;
-    }
-  },
-
   accessToken: Ember.computed('auth', {
     /*jshint unused: false*/
     get(key) {
       return this.get('auth') ? this.get('auth').getAccessToken() : false;
     }
   }),
-
-  getAccessToken: function() {
-    Ember.deprecate('Use the Session property accessToken instead of getAccessToken() method. Will be removed in version 2.0', false, {
-      id: 'model.session.getAccessToken()',
-      until: '2.0.0'
-    });
-    if (this.get('auth')) {
-      return this.auth.getAccessToken();
-    } else {
-      return null;
-    }
-  },
 
   authorize: function() {
     var self = this;

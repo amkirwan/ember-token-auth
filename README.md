@@ -102,8 +102,6 @@ The session model provides the interface for handling session data via [Ember-OA
 *methods*
 - authorize - Returns a promise with the resolved or rejected response
 - signout -  Removes the token from the localstorage and sets the auth and providerId to null on the session model
-- getToken - *Deprecated* Return the the token from localstorage saved by EmberOAuth2 if it exists otherwise null
-- getAccessToken - *Deprecatd* Return the access token property value from the token saved in localstorage
 
 *properties*
 - provider - You can set the provider with the providerId from the OAuth2 config
