@@ -26,7 +26,7 @@ test('return auth from provider if providerId given', function(assert) {
 
 test('sets and returns the auth provider', function(assert) {
   var newAuth = model.set('provider', auth.get('providerId'));
-  assert.equal(auth.get('providerId'), newAuth.get('providerId'));
+  assert.equal(auth.get('providerId'), newAuth);
 });
 
 test('sets and returns the auth provider', function(assert) {
