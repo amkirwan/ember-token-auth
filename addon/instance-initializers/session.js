@@ -1,6 +1,6 @@
 
 export function initialize(app) {
-  var session = app.container.lookup('session:current');
+  var session = app.lookup('session:current');
 
   var config = window.EmberENV['ember-oauth2'];
 
@@ -16,7 +16,7 @@ export function initialize(app) {
     }
   }
 
-  var sessionCtrl = app.container.lookup('controller:session');
+  var sessionCtrl = app.lookup('controller:session');
 
   // try and load the user if the session is still valid
   if (session.get('auth.providerId')) {
