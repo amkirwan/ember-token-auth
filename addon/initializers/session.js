@@ -1,11 +1,11 @@
 import Session from '../models/session';
 
-export function initialize(registry/*, app*/) {
-  registry.register('session:current', Session, { singleton: true });
+export function initialize(app) {
+  app.register('session:current', Session, { singleton: true });
 
-  registry.inject('controller', 'sessionCurrent', 'session:current');
-  registry.inject('route', 'sessionCurrent', 'session:current');
-  registry.inject('adapter', 'sessionCurrent', 'session:current');
+  app.inject('controller', 'sessionCurrent', 'session:current');
+  app.inject('route', 'sessionCurrent', 'session:current');
+  app.inject('adapter', 'sessionCurrent', 'session:current');
 
 }
 
