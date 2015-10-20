@@ -29,7 +29,7 @@
     "ember-qunit": "0.4.10",
     "ember-qunit-notifications": "0.0.7",
     "qunit": "~1.18.0",
-    "ember-oauth2": "amkirwan/ember-oauth2#1.0.0"
+    "ember-oauth2": "amkirwan/ember-oauth2#1.0.1"
   },
   "devDependencies": {
     "sinon-browser-only": "~1.12.1"
