@@ -3,10 +3,12 @@ import Session from 'dummy/models/session';
 import User from 'dummy/models/user';
 import { test, moduleFor } from 'ember-qunit';
 import { setupStore } from '../../helpers/store-helper';
+import Pretender from 'pretender';
 
 var container;
 var store; 
 var sessionCurrent;
+var server;
 
 moduleFor('controller:session', 'SessionController', {
   setup: function() { 
@@ -26,12 +28,22 @@ moduleFor('controller:session', 'SessionController', {
 
     store = container.lookup('service:store');
     store.set('adapter', '-json-api');
+
+    server = new Pretender(function() {
+      this.get('/api/current-user', function() {
+        return [200, {"Content-Type": "application/vnd.api+json"}, JSON.stringify({"data":{"type":"users","id":"1","attributes":{"firstname":"foo","lastname":"bar"}}})];
+      });
+      this.get('/api/current-user-error', function() {
+        return [500, {"Content-Type": "application/vnd.api+json"}, JSON.stringify({"errors":[{"id":"1","status":"500","title":"internal_service_error","detail":"internal_service_error_detail"}]})];
+      });
+    });
   }
 });
 
 test('it exists', function(assert) {
   var controller = this.subject();
   assert.ok(controller);
+  server.shutdown();
 });
 
 test('loadUser should set the currentUser', function(assert) {
@@ -47,7 +59,6 @@ test('loadUser should set the currentUser', function(assert) {
 
   ctrl.loadUser().then(function() {
     assert.equal(ctrl.get('loginError'), false);
-    // assert.equal(ctrl.get('currentUser').get('lastname'), 'bar');
   });
 });
 
