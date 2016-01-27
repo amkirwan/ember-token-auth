@@ -1,6 +1,6 @@
 import { test, moduleForModel } from 'ember-qunit';
 import Session from 'dummy/models/session';
-import { auth } from 'dummy/tests/helpers/ember-oauth2';
+import { auth } from 'dummy/helpers/ember-oauth2';
 
 var model;
 
