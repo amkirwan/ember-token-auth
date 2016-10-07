@@ -14,7 +14,7 @@ export default Ember.Controller.extend({
     }
 
     if (handleTransition) {
-      var previousTransition = this.get('previousTransition');
+      let previousTransition = this.get('previousTransition');
       if (previousTransition) {
         this.set('previousTransition', null);
         previousTransition.retry();
@@ -25,13 +25,13 @@ export default Ember.Controller.extend({
   },
 
   loadUser: function(handleTransition) {
-    var self = this;
-    var adapter = this.get('container').lookup('adapter:session');
+    let self = this;
+    let adapter = Ember.getOwner(self).lookup('adapter:session');
     return new Ember.RSVP.Promise(function(resolve, reject) {
       adapter.currentUser().then(function(json) {
-        var modelName = window.EmberENV['ember-oauth2']['model'];
+        let modelName = window.EmberENV['ember-oauth2']['model'];
 
-        var user = null;
+        let user = null;
         if (json['data']['type'] === modelName) {
           self.store.pushPayload(json);
           user = self.store.peekRecord('user', json['data']['id']);
