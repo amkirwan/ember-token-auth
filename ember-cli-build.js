@@ -1,21 +1,11 @@
 /* global require, module */
-var EmberApp = require('ember-cli/lib/broccoli/ember-addon');
+var EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 
 module.exports = function(defaults) {
-  var app = new EmberApp(defaults, {
+  var app = new EmberAddon(defaults, {
     // Add options here
 
   });
-
-  app.import('bower_components/ember-oauth2/dist/ember-oauth2.amd.js', {
-    exports: {
-      'ember-oauth2': [ 'default' ]
-    }
-  });
-
-  if (app.env === 'development' || app.env === 'test') {
-    app.import('bower_components/sinon-browser-only/sinon.js');
-  }
 
   /*
     This build file specifes the options for the dummy test app of this
