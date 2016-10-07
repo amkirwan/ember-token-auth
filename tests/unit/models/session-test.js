@@ -1,81 +1,123 @@
-import { test, moduleForModel } from 'ember-qunit';
-import Session from 'dummy/models/session';
-import { auth } from 'dummy/helpers/ember-oauth2';
+import { test, moduleFor } from 'ember-qunit';
 
-var model;
-
-moduleForModel('session:current', 'Session Model', {
-  setup: function() {
-    model = Session.create();
-    model.set('auth', auth); /* set the auth object because generating it in Session.create() will cause tests to fail that compaire auth */
+moduleFor('model:session', 'Unit | Model | session', {
+  unit: true,
+  needs: ['service:ember-oauth2'],
+  beforeEach: function() { 
+    window.EmberENV['ember-oauth2'] =
+    {
+      model: 'users',
+      testAuth: {
+        clientId: '12345',
+        authBaseUri: '/oauth/authorize',
+        redirectUri: '/oauth/callback',
+        currentUser: '/api/current-user',
+        currentUserError: '/api/current-user-error', 
+        tokeninfo: '/oauth/token/info',
+        scope: 'public'
+      },
+      otherTestAuth: {
+        clientId: 'abcde',
+        authBaseUri: '/oauth/authorize',
+        redirectUri: '/oauth/callback',
+        currentUser: '/api/current-user',
+        currentUserError: '/api/current-user-error', 
+        tokeninfo: '/oauth/token/info',
+        scope: 'public'
+      }
+    };
   }
 });
 
 test('it exists', function(assert) {
-  assert.ok(model);
+  const session = this.subject();
+  assert.ok(session);
 });
 
-test('create the session and set the auth object', function(assert) {
-  var m = Session.create({providerId: 'testAuth'});
-  assert.deepEqual(m.get('provider'), auth);
+test('set the provider for authorization', function(assert) {
+  const session = this.subject();
+  session.set('provider', 'testAuth');
+  assert.equal(session.get('provider'), 'testAuth');
 });
 
-test('return auth from provider if providerId given', function(assert) {
-  assert.equal(model.get('provider'), auth);
+test('sets the correct authorization config', function(assert) {
+  const session = this.subject();
+  session.set('provider', 'testAuth');
+  assert.deepEqual(session.get('auth.providerConfig'), window.EmberENV['ember-oauth2']['testAuth']);
 });
 
-test('sets and returns the auth provider', function(assert) {
-  var newAuth = model.set('provider', auth.get('providerId'));
-  assert.equal(auth.get('providerId'), newAuth);
-});
-
-test('sets and returns the auth provider', function(assert) {
-  model.set('provider', null);
-  assert.ok(!model.get('provider'));
-  assert.ok(!model.get('auth'));
+test('sets a new provider', function(assert) {
+  const session = this.subject();
+  session.set('provider', 'testAuth');
+  session.set('provider', 'otherTestAuth');
+  assert.deepEqual(session.get('auth.providerConfig'), window.EmberENV['ember-oauth2']['otherTestAuth']);
 });
 
 test('isExpired returns false when the token is not expired', function(assert) {
-  var stub = sinon.stub(auth, 'accessTokenIsExpired', function() { return false; });
-  assert.equal(model.get('isExpired'), false);
+  const session = this.subject();
+  session.set('provider', 'testAuth');
+  let stub = sinon.stub(session.get('auth'), 'accessTokenIsExpired', function() { return false; });
+  assert.equal(session.get('isExpired'), false);
   stub.restore();
 });
 
+
 test('isExpired returns true when the token is expired', function(assert) {
-  var stub = sinon.stub(auth, 'accessTokenIsExpired', function() { return true; });
-  assert.equal(model.get('isExpired'), true);
+  const session = this.subject();
+  session.set('provider', 'testAuth');
+  let stub = sinon.stub(session.get('auth'), 'accessTokenIsExpired', function() { return true; });
+  assert.equal(session.get('isExpired'), true);
   stub.restore();
 });
 
 test('isNotExpired returns true when the token is expired', function(assert) {
-  var stub = sinon.stub(auth, 'accessTokenIsExpired', function() { return false; });
-  assert.equal(model.get('isNotExpired'), true);
+  const session = this.subject();
+  session.set('provider', 'testAuth');
+  let stub = sinon.stub(session.get('auth'), 'accessTokenIsExpired', function() { return false; });
+  assert.equal(session.get('isNotExpired'), true);
   stub.restore();
 });
 
 test('isNotExpired returns false when the token is expired', function(assert) {
-  var stub = sinon.stub(auth, 'accessTokenIsExpired', function() { return true; });
-  assert.equal(model.get('isNotExpired'), false);
+  const session = this.subject();
+  session.set('provider', 'testAuth');
+  let stub = sinon.stub(session.get('auth'), 'accessTokenIsExpired', function() { return true; });
+  assert.equal(session.get('isNotExpired'), false);
   stub.restore();
 });
 
 test('token property returns the oauth token', function(assert) {
   let token = { provider_id: 'testAuth', expires_in: '12345', scope: 'public', access_token: '12345abc' };
-  let stub = sinon.stub(auth, 'getToken', function() { return token; });
-  assert.equal(model.get('token'), token);
+  const session = this.subject();
+  session.set('provider', 'testAuth');
+  let stub = sinon.stub(session.get('auth'), 'getToken', function() { return token; });
+  assert.equal(session.get('token'), token);
   stub.restore();
 });
 
 test('accessToken returns the oauth token', function(assert) {
   let token = { provider_id: 'testAuth', expires_in: '12345', scope: 'public', access_token: '12345abc' };
-  let stub = sinon.stub(auth, 'getAccessToken', function() { return token.access_token; });
-  assert.equal(model.get('accessToken'), token.access_token);
+  const session = this.subject();
+  session.set('provider', 'testAuth');
+  let stub = sinon.stub(session.get('auth'), 'getAccessToken', function() { return token.access_token; });
+  assert.equal(session.get('accessToken'), token.access_token);
   stub.restore();
 });
 
 test('authorize calls authorize method on auth object', function(assert) {
-  var mock = sinon.mock(auth);
-  mock.expects('authorize').once();
-  model.authorize();
-  assert.ok(mock.verify());
+  const session = this.subject();
+  session.set('provider', 'testAuth');
+  let stub = sinon.stub(session.get('auth'), 'authorize', function() { return true; });
+  session.authorize();
+  assert.ok(stub.calledOnce);
+});
+
+test('signout destroys auth session', function(assert) {
+  assert.expect(2);
+  const session = this.subject();
+  session.set('provider', 'testAuth');
+  let stub = sinon.stub(session.get('auth'), 'removeToken', function() { return true; });
+  session.signout();
+  assert.ok(stub.calledOnce);
+  assert.notOk(session.get('auth'));
 });

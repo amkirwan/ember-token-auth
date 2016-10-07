@@ -1,13 +1,8 @@
 import Ember from 'ember';
-import OAuth2 from 'ember-oauth2';
 
 export default Ember.Object.extend({
-  init: function() {
-    this._super();
-    if (this.get('providerId')) {
-      this.set('auth', OAuth2.create({providerId: this.get('providerId')}));
-    }
-  },
+  emberOauth2: Ember.inject.service(),
+  auth: null,
 
   provider: Ember.computed('auth', {
     /*jshint unused: false*/
@@ -18,10 +13,11 @@ export default Ember.Object.extend({
       this.set('providerId', value);
       // check if the value is falsey ie: most likely set to null
       if (value) {
-        this.set('auth', OAuth2.create({providerId: value}));
+        this.set('auth', this.get('emberOauth2').setProvider(value));
       } else {
         this.set('auth', value);
       }
+      return value;
     }
   }),
 
