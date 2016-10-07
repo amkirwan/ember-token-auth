@@ -1,33 +1,32 @@
-import SessionAdapter from 'dummy/adapters/session';
 import Session from 'dummy/models/session';
-import User from 'dummy/models/user';
 import { test, moduleFor } from 'ember-qunit';
-import { setupStore } from '../../helpers/store-helper';
 import Pretender from 'pretender';
 
-var container;
-var store; 
-var sessionCurrent;
-var server;
+let sessionCurrent;
+let server;
 
-moduleFor('controller:session', 'SessionController', {
-  setup: function() { 
-    var env = setupStore();
-    var registry = env.registry;
-    container = env.container;
-
-    registry.register('adapter:session', SessionAdapter);
-    registry.register('model:user', User);
-
-    registry.register('session:current', Session, {singleton: true});
-    registry.injection('controller', 'sessionCurrent', 'session:current');
-    registry.injection('adapter', 'sessionCurrent', 'session:current');
-
-    sessionCurrent = container.lookup('session:current');
+moduleFor('controller:session', 'Unit | SessionController | session', {
+  unit: true,
+  needs: ['model:session', 'model:user', 'adapter:session', 'service:ember-oauth2' ],
+  beforeEach: function() { 
+    window.EmberENV['ember-oauth2'] =
+    {
+      model: 'users',
+      testAuth: {
+        clientId: '12345',
+        authBaseUri: '/oauth/authorize',
+        redirectUri: '/oauth/callback',
+        currentUser: '/api/current-user',
+        currentUserError: '/api/current-user-error', 
+        tokeninfo: '/oauth/token/info',
+        scope: 'public'
+      }
+    };
+    // inject and configure the session
+    this.register('session:current', Session, {singleton: true});
+    this.registry.injection('adapter', 'sessionCurrent', 'session:current');
+    sessionCurrent = this.container.lookup('session:current');
     sessionCurrent.set('provider', 'testAuth');
-
-    store = container.lookup('service:store');
-    store.set('adapter', '-json-api');
 
     server = new Pretender(function() {
       this.get('/api/current-user', function() {
@@ -37,21 +36,20 @@ moduleFor('controller:session', 'SessionController', {
         return [500, {"Content-Type": "application/vnd.api+json"}, JSON.stringify({"errors":[{"id":"1","status":"500","title":"internal_service_error","detail":"internal_service_error_detail"}]})];
       });
     });
+  },
+  afterEach: function() {
+    server.shutdown();
   }
 });
 
 test('it exists', function(assert) {
-  var controller = this.subject();
-  assert.ok(controller);
-  server.shutdown();
+  const ctrl = this.subject();
+  assert.ok(ctrl);
 });
 
 test('loadUser should set the currentUser', function(assert) {
   assert.expect(2); 
-
-  var ctrl = this.subject();
-  ctrl.set('container', container);
-  ctrl.set('store', store);
+  const ctrl = this.subject();
 
   ctrl.transitionToRoute = function() { return true; };
 
@@ -69,7 +67,6 @@ test('should set loginError to true when ajax fails', function(assert) {
 
   var ctrl = this.subject();
   ctrl.set('sessionCurrent', sessionCurrent);
-  ctrl.set('container', container);
 
   ctrl.loadUser().then(function(data) {
     assert.equal(data, null);
