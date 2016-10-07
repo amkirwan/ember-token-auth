@@ -1,22 +1,8 @@
-import Ember from 'ember';
-import SessionController from 'dummy/controllers/session';
 import { test, moduleFor } from 'ember-qunit';
-import { setupStore } from '../../helpers/store-helper';
 
-var container;
-var registry;
-
-moduleFor('controller:login', 'LoginController', {
-  // Specify the other units that are required for this test.
-  setup: function() {
-    var env = setupStore();
-    registry = env.registry;
-    container = env.container;
-
-    registry.register('controller:session', SessionController);
-    var sessionCtrl = container.lookup('controller:session');
-    this.subject().set('session', sessionCtrl);
-  }
+moduleFor('controller:login', 'Unit | LoginController | login', {
+  unit: true,
+  needs: ['controller:session']
 });
 
 // Replace this with your real tests.
