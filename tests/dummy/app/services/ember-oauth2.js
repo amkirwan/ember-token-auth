@@ -3,24 +3,6 @@ import EmberOAuth2 from 'ember-oauth2/services/ember-oauth2';
 
 export default EmberOAuth2.extend({
 
-  init() {
-    this.set('statePrefix', 'state');
-    this.set('tokenPrefix', 'token');
-    this.set('responseType', 'token');
-    this.setConfig();
-  },
-
-  setConfig() {
-    this.set('config', window.EmberENV['ember-oauth2']);
-  },
-
-  setProvider(providerId) {
-    this.set('providerId', providerId);
-    this.set('providerConfig', this.get('config')[this.get('providerId')]);
-    this.setProperties(this.providerConfig);
-    return this;
-  },
-
   checkState() {
     return true;
   },
