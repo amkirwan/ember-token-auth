@@ -1,3 +1,4 @@
+import Ember from 'ember';
 
 export function initialize(app) {
   var session = app.lookup('session:current');
@@ -20,7 +21,9 @@ export function initialize(app) {
 
   // try and load the user if the session is still valid
   if (session.get('auth.providerId')) {
-    sessionCtrl.loadUser(false);
+    sessionCtrl.loadUser(false).catch(function(error) {
+      Ember.Logger.error(error);
+    });
   }
 
 }

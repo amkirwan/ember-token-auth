@@ -6,7 +6,6 @@ export function initialize(app) {
   app.inject('controller', 'sessionCurrent', 'session:current');
   app.inject('route', 'sessionCurrent', 'session:current');
   app.inject('adapter', 'sessionCurrent', 'session:current');
-
 }
 
 export default {
