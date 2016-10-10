@@ -1,6 +1,6 @@
 # Ember-Token-Auth
 
-Current Version: **[2.0.4](https://github.com/amkirwan/ember-token-auth/releases/tag/v2.0.4)**
+Current Version: **[3.0.0-beta](https://github.com/amkirwan/ember-token-auth/releases/tag/v3.0.0-beta)**
 
 [![Circle CI](https://circleci.com/gh/amkirwan/ember-token-auth.svg?style=svg)](https://circleci.com/gh/amkirwan/ember-token-auth)
 
@@ -146,6 +146,7 @@ export default Ember.Component.extend({
 });
 ```
 
+
 ## Running Ember-Token-Auth and the tests
 
 * `git clone https://github.com/amkirwan/ember-token-auth.git`
@@ -154,6 +155,7 @@ export default Ember.Component.extend({
 * `ember serve`
 * visit `http://localhost:4200` to run the demo test dummy app.
 * visit `http://localhost:4200/tests` to run the tests
+
 
 
 ## Building
