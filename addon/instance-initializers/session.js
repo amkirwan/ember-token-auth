@@ -6,7 +6,7 @@ export function initialize(app) {
   var config = window.EmberENV['ember-oauth2'];
 
   for (var key in config) {
-    if (config.hasOwnProperty(key)) {
+    if (config.hasOwnProperty(key) && key !== 'model') {
       session.set('provider',  key);
       // sets session providerId and auth to null if expired
       if (session.get('isExpired')) { 
