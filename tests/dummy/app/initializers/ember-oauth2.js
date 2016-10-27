@@ -1,6 +1,3 @@
-// import { config, hashConfig, savedStateConfig, reopenConfig } from 'dummy/helpers/ember-oauth2';
-// import OAuth2 from 'ember-oauth2';
-
 /* jshint unused: false */
 export function initialize(app) {
   configEmberOAuth2();
