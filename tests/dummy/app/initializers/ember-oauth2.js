@@ -5,7 +5,7 @@ export function initialize(app) {
 
 function configEmberOAuth2() {
  window.EmberENV['ember-oauth2'] = {
-    model: 'users',
+    model: 'user',
     testAuth: {
       clientId: '12345',
       authBaseUri: '/oauth/authorize',

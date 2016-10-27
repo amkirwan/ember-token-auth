@@ -32,9 +32,9 @@ export default Ember.Controller.extend({
         let modelName = window.EmberENV['ember-oauth2']['model'];
 
         let user = null;
-        if (json['data']['type'] === modelName) {
+        if (json['data']['type'] === Ember.String.pluralize(modelName)) {
           self.store.pushPayload(json);
-          user = self.store.peekRecord('user', json['data']['id']);
+          user = self.store.peekRecord(modelName, json['data']['id']);
         }
 
         if (user) {
