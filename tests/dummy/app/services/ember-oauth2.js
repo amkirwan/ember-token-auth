@@ -8,8 +8,9 @@ export default EmberOAuth2.extend({
   },
 
   openWindow() {
+    // return url or opener postMessage with url
     return new Ember.RSVP.Promise(function(resolve) {
-      resolve({ location: { hash: '#access_token=12345&token_type=Bearer&expires_in=3600&state=abcd' } });
+      resolve('http://foobar.dev#access_token=12345&token_type=Bearer&expires_in=3600&state=abcd');
     });
   }
 });

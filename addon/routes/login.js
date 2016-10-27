@@ -22,7 +22,7 @@ export default Ember.Route.extend({
     if (this.get('provider')) {
       var sessionCurrent = this.get('sessionCurrent');
       return sessionCurrent.authorize().then(function(response) {
-        sessionCurrent.get('auth').trigger('redirect', response.location.hash);
+        sessionCurrent.get('auth').trigger('redirect', response);
       }, function(error) {
         sessionCurrent.get('auth').trigger('error', error);
       });
