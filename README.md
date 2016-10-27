@@ -1,6 +1,6 @@
 # Ember-Token-Auth
 
-Current Version: **[3.0.0-beta](https://github.com/amkirwan/ember-token-auth/releases/tag/v3.0.0-beta)**
+Current Version: **[3.0.1-beta](https://github.com/amkirwan/ember-token-auth/releases/tag/v3.0.1-beta)**
 
 [![Circle CI](https://circleci.com/gh/amkirwan/ember-token-auth.svg?style=svg)](https://circleci.com/gh/amkirwan/ember-token-auth)
 
