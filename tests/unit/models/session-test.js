@@ -6,7 +6,7 @@ moduleFor('model:session', 'Unit | Model | session', {
   beforeEach: function() { 
     window.EmberENV['ember-oauth2'] =
     {
-      model: 'users',
+      model: 'user',
       testAuth: {
         clientId: '12345',
         authBaseUri: '/oauth/authorize',

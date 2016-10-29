@@ -76,3 +76,16 @@ test('should set loginError to true when ajax fails', function(assert) {
 
   sessionCurrent.auth.currentUser = oldCurrentUserPath;
 });
+
+test("can set a custom jsonModelName", function(assert) {
+  assert.expect(3);
+
+  let ctrl = this.subject();
+	ctrl.set('modelName', 'foobar');
+	ctrl.set('jsonModelName', 'qux');
+	ctrl.set('storeModelName', 'foobar');
+
+  assert.equal(ctrl.get('modelName'), 'foobar');
+  assert.equal(ctrl.get('jsonModelName'), 'qux');
+  assert.equal(ctrl.get('storeModelName'), 'foobar');
+});
