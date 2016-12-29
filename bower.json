@@ -1,6 +1,6 @@
 {
   "name": "ember-token-auth",
-  "version": "3.0.2-beta",
+  "version": "3.0.3-beta",
   "homepage": "https://github.com/amkirwan/ember-token-auth",
   "authors": [
     "Anthony Kirwan <amkirwan@gmail.com>"
