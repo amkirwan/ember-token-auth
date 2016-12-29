@@ -18,7 +18,7 @@ ember generate ember-token-auth
 
 ### Getting it to work with your Ember-CLI App
 
-Create an initialzier to setup your Ember-OAuth2 config. For more information checkout the Ember-OAuth2 [README](https://github.com/amkirwan/ember-oauth).
+Create an initialzier to setup your Ember-OAuth2 config. For more information checkout the Ember-OAuth2 [README](https://github.com/amkirwan/ember-oauth2).
 
 In addition you will need to set the name of the model that the user should be persisted to. In the example setup it is set to `user`.
 
