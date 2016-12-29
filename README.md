@@ -1,6 +1,6 @@
 # Ember-Token-Auth
 
-Current Version: **[3.0.1-beta](https://github.com/amkirwan/ember-token-auth/releases/tag/v3.0.1-beta)**
+Current Version: **[3.0.4-beta](https://github.com/amkirwan/ember-token-auth/releases/tag/v3.0.4-beta)**
 
 [![Circle CI](https://circleci.com/gh/amkirwan/ember-token-auth.svg?style=svg)](https://circleci.com/gh/amkirwan/ember-token-auth)
 
@@ -163,3 +163,4 @@ export default Ember.Component.extend({
 * `ember build`
 
 For more information on using ember-cli, visit [EmberCli](http://www.ember-cli.com/)
+
